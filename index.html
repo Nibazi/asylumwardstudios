@@ -850,7 +850,7 @@
         <h2 class="section-title">Contact</h2>
         <p class="section-subtitle">Reach into the void</p>
       </div>
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" action="https://formspree.io/f/xvzaqpbn" method="POST">
         <div class="form-row">
           <input type="text" name="name" placeholder="Name" class="input-field" required>
           <input type="email" name="email" placeholder="Email" class="input-field" required>
@@ -926,12 +926,7 @@
       });
     });
 
-    // Contact form (placeholder - connect to your backend)
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thank you for your message! We\'ll get back to you soon.');
-      e.target.reset();
-    });
+
   </script>
 </body>
 </html>
