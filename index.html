@@ -38,6 +38,78 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
   <style>
+    /* Loading Animation */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #0a0a0c;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeOut 0.5s ease-out 2.5s forwards;
+    }
+
+    #loader img {
+      width: 120px;
+      height: 120px;
+      animation: loaderFlicker 0.15s infinite, loaderPulse 2s ease-out forwards;
+    }
+
+    #loader .loader-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+      margin-top: 20px;
+      opacity: 0;
+      animation: loaderFlicker 0.15s infinite, textReveal 1s ease-out 0.8s forwards;
+    }
+
+    #loader .loader-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(196, 30, 58, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0;
+      animation: glowPulse 0.5s ease-out 1.5s forwards;
+    }
+
+    @keyframes loaderFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+      75% { opacity: 0.4; }
+      90% { opacity: 1; }
+    }
+
+    @keyframes loaderPulse {
+      0% { opacity: 0; transform: scale(0.8); }
+      20% { opacity: 1; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes textReveal {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glowPulse {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(1.5); }
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -711,6 +783,13 @@
   </style>
 </head>
 <body>
+  <!-- Loading Animation -->
+  <div id="loader">
+    <div class="loader-glow"></div>
+    <img src="AsylumWardLogo.png" alt="">
+    <div class="loader-text">ASYLUM WARD STUDIOS</div>
+  </div>
+
   <!-- Scanline Effect -->
   <div class="scanline"></div>
 
@@ -925,6 +1004,12 @@
   </div>
 
   <script>
+    // Remove loader after animation
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    }, 3000);
+
     // Modal functions
     function showModal() {
       document.getElementById('thankYouModal').style.display = 'flex';
