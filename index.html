@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
   <style>
-    /* Loading Animation */
+    /* Loading Animation - Static/Glitch */
     #loader {
       position: fixed;
       top: 0;
@@ -51,13 +51,29 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadeOut 0.5s ease-out 2.5s forwards;
+      animation: fadeOut 0.3s ease-out 2.5s forwards;
+    }
+
+    #loader .static {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.15;
+      animation: staticFlicker 0.1s infinite, staticFadeOut 0.5s ease-out 2s forwards;
+    }
+
+    #loader .logo-container {
+      position: relative;
+      animation: glitchIn 2s ease-out forwards;
     }
 
     #loader img {
       width: 120px;
       height: 120px;
-      animation: loaderFlicker 0.15s infinite, loaderPulse 2s ease-out forwards;
+      animation: logoGlitch 0.3s infinite;
     }
 
     #loader .loader-text {
@@ -67,42 +83,69 @@
       color: #c41e3a;
       letter-spacing: 0.15em;
       margin-top: 20px;
+      animation: textGlitch 0.3s infinite, textReveal 0.5s ease-out 1s forwards;
       opacity: 0;
-      animation: loaderFlicker 0.15s infinite, textReveal 1s ease-out 0.8s forwards;
     }
 
-    #loader .loader-glow {
+    #loader .glitch-line {
       position: absolute;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(196, 30, 58, 0.3) 0%, transparent 70%);
-      border-radius: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #c41e3a;
       opacity: 0;
-      animation: glowPulse 0.5s ease-out 1.5s forwards;
+      animation: glitchLine 0.2s infinite;
     }
 
-    @keyframes loaderFlicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-      75% { opacity: 0.4; }
-      90% { opacity: 1; }
+    @keyframes staticFlicker {
+      0%, 100% { opacity: 0.15; }
+      25% { opacity: 0.1; }
+      50% { opacity: 0.2; }
+      75% { opacity: 0.05; }
     }
 
-    @keyframes loaderPulse {
-      0% { opacity: 0; transform: scale(0.8); }
-      20% { opacity: 1; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1); }
+    @keyframes staticFadeOut {
+      0% { opacity: 0.15; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes glitchIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      10% { opacity: 0.5; transform: scale(1) translateX(-5px); }
+      20% { opacity: 0.3; transform: scale(1) translateX(5px); }
+      30% { opacity: 0.7; transform: scale(1.02) translateX(-3px); }
+      40% { opacity: 0.5; transform: scale(0.98) translateX(3px); }
+      50% { opacity: 1; transform: scale(1) translateX(0); }
+      100% { opacity: 1; transform: scale(1) translateX(0); }
+    }
+
+    @keyframes logoGlitch {
+      0%, 100% { transform: translateX(0); filter: none; }
+      20% { transform: translateX(-2px); filter: hue-rotate(90deg); }
+      40% { transform: translateX(2px); filter: none; }
+      60% { transform: translateX(-1px); filter: hue-rotate(-90deg); }
+      80% { transform: translateX(1px); filter: none; }
+    }
+
+    @keyframes textGlitch {
+      0%, 100% { transform: translateX(0); text-shadow: none; }
+      25% { transform: translateX(-2px); text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
+      50% { transform: translateX(2px); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+      75% { transform: translateX(-1px); text-shadow: 1px 0 #00ffff, -1px 0 #ff00ff; }
     }
 
     @keyframes textReveal {
-      0% { opacity: 0; transform: translateY(10px); }
-      100% { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    @keyframes glowPulse {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0; transform: scale(1.5); }
+    @keyframes glitchLine {
+      0%, 100% { opacity: 0; top: 0; }
+      10% { opacity: 0.8; top: 20%; }
+      30% { opacity: 0; top: 40%; }
+      50% { opacity: 0.6; top: 60%; }
+      70% { opacity: 0; top: 80%; }
+      90% { opacity: 0.4; top: 90%; }
     }
 
     @keyframes fadeOut {
@@ -785,9 +828,12 @@
 <body>
   <!-- Loading Animation -->
   <div id="loader">
-    <div class="loader-glow"></div>
-    <img src="AsylumWardLogo.png" alt="">
-    <div class="loader-text">ASYLUM WARD STUDIOS</div>
+    <div class="static"></div>
+    <div class="glitch-line"></div>
+    <div class="logo-container">
+      <img src="AsylumWardLogo.png" alt="">
+      <div class="loader-text">ASYLUM WARD STUDIOS</div>
+    </div>
   </div>
 
   <!-- Scanline Effect -->
