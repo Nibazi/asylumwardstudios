@@ -881,7 +881,39 @@
     <p>© 2026 Asylum Ward Studios. All rights reserved.</p>
   </footer>
 
+  <!-- Thank You Modal -->
+  <div id="thankYouModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="background: linear-gradient(135deg, #1a1a1f, #0a0a0c); border: 1px solid #c41e3a; padding: 50px; text-align: center; max-width: 400px; margin: 20px;">
+      <h3 style="font-family: 'Montserrat', sans-serif; font-size: 28px; color: #c41e3a; margin-bottom: 20px; letter-spacing: 0.1em;">THANK YOU</h3>
+      <p style="color: #888; font-size: 18px; margin-bottom: 30px;">Your message has been sent. We'll get back to you soon.</p>
+      <button onclick="closeModal()" style="background: linear-gradient(135deg, #8b0000, #c41e3a); color: white; border: none; padding: 14px 35px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; cursor: pointer;">CLOSE</button>
+    </div>
+  </div>
+
   <script>
+    // Modal functions
+    function showModal() {
+      document.getElementById('thankYouModal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+      document.getElementById('thankYouModal').style.display = 'none';
+    }
+
+    // Form submission
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          showModal();
+          this.reset();
+        }
+      });
+    });
     // Create particles
     const particlesContainer = document.getElementById('particles');
     for (let i = 0; i < 20; i++) {
