@@ -73,24 +73,26 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -45%);
-      width: 30px;
-      height: 50px;
-      background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.9) 0%, rgba(139, 0, 0, 0.5) 40%, transparent 70%);
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.8) 0%, rgba(139, 0, 0, 0.4) 30%, transparent 70%);
       opacity: 0;
       animation: doorGlow 2.5s ease-out forwards;
-      filter: blur(8px);
+      filter: blur(15px);
+      border-radius: 50%;
     }
 
     #loader .light-spill {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -40%);
-      width: 300px;
-      height: 400px;
-      background: radial-gradient(ellipse at center top, rgba(196, 30, 58, 0.3) 0%, rgba(139, 0, 0, 0.1) 30%, transparent 60%);
+      transform: translate(-50%, -20%);
+      width: 250px;
+      height: 350px;
+      background: radial-gradient(ellipse at 50% 20%, rgba(196, 30, 58, 0.25) 0%, rgba(139, 0, 0, 0.1) 25%, transparent 55%);
       opacity: 0;
       animation: lightSpill 2s ease-out 1s forwards;
+      filter: blur(10px);
     }
 
     #loader .loader-text {
@@ -112,17 +114,17 @@
     }
 
     @keyframes doorGlow {
-      0% { opacity: 0; transform: translate(-50%, -45%) scale(0.5); }
-      30% { opacity: 0.3; transform: translate(-50%, -45%) scale(0.8); }
-      60% { opacity: 0.8; transform: translate(-50%, -45%) scale(1); }
-      80% { opacity: 1; transform: translate(-50%, -45%) scale(1.1); }
-      100% { opacity: 0.6; transform: translate(-50%, -45%) scale(1); }
+      0% { opacity: 0; }
+      30% { opacity: 0.3; }
+      60% { opacity: 0.7; }
+      80% { opacity: 1; }
+      100% { opacity: 0.8; }
     }
 
     @keyframes lightSpill {
-      0% { opacity: 0; transform: translate(-50%, -40%) scaleY(0.3); }
-      50% { opacity: 0.8; transform: translate(-50%, -40%) scaleY(1); }
-      100% { opacity: 0.4; transform: translate(-50%, -40%) scaleY(1.2); }
+      0% { opacity: 0; }
+      50% { opacity: 0.7; }
+      100% { opacity: 0.5; }
     }
 
     @keyframes textFadeIn {
