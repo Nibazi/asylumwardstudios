@@ -137,6 +137,82 @@
       100% { opacity: 0; visibility: hidden; }
     }
 
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glowing Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #8b0000, #c41e3a);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+      text-decoration: none;
+      display: inline-block;
+      animation: buttonPulse 2s infinite;
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(196, 30, 58, 0.6);
+      animation: none;
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(196, 30, 58, 0.3); }
+      50% { box-shadow: 0 0 35px rgba(196, 30, 58, 0.6); }
+    }
+
+    /* Game Card Hover Glow */
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 0 0 rgba(196, 30, 58, 0);
+    }
+
+    .game-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(196, 30, 58, 0.5), 0 0 60px rgba(196, 30, 58, 0.2);
+    }
+
+    /* Section Title */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 6vw, 64px);
+      color: transparent;
+      background: linear-gradient(180deg, #c41e3a, #4a0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(196, 30, 58, 0.3);
+      margin-bottom: 20px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -364,28 +440,6 @@
       letter-spacing: 1px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #8b0000, #c41e3a);
-      color: white;
-      border: none;
-      padding: 16px 40px;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
-    }
-
     .scroll-indicator {
       position: absolute;
       bottom: 40px;
@@ -427,20 +481,6 @@
       margin-bottom: 80px;
     }
 
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 400;
-      font-size: clamp(36px, 6vw, 64px);
-      color: transparent;
-      background: linear-gradient(180deg, #c41e3a, #4a0000);
-      -webkit-background-clip: text;
-      background-clip: text;
-      text-shadow: 0 0 40px rgba(196, 30, 58, 0.3);
-      margin-bottom: 20px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
     .section-subtitle {
       font-family: 'Special Elite', cursive;
       color: #666;
@@ -453,21 +493,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
-    }
-
-    .game-card {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.4s ease;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .game-card:hover {
-      transform: scale(1.02);
     }
 
     .game-card-image {
@@ -870,11 +895,11 @@
   <!-- Games Section -->
   <section id="games">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <h2 class="section-title">Our Games</h2>
         <p class="section-subtitle">Systems-driven horror experiences</p>
       </div>
-      <div class="games-grid">
+      <div class="games-grid fade-in">
         <!-- Game 1: Occult Shop Clicker -->
         <div class="game-card" style="background: linear-gradient(135deg, #3d2d1f, #251a10); border: 1px solid rgba(122, 90, 61, 0.2);">
           <div class="game-card-image" style="background: linear-gradient(135deg, #3d2d1f, #251a10);">
@@ -942,11 +967,11 @@
   <!-- About Section -->
   <section id="about">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <h2 class="section-title">About Us</h2>
         <p class="section-subtitle">The minds behind the madness</p>
       </div>
-      <div class="about-grid">
+      <div class="about-grid fade-in">
         <div class="about-text">
           <h3>Our Philosophy</h3>
           <p>Atmospheric and psychological horror. Systems-driven experiences where tension comes from mechanics, not jump scares.</p>
@@ -973,11 +998,11 @@
   <!-- News Section -->
   <section id="news">
     <div class="section-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <h2 class="section-title">News</h2>
         <p class="section-subtitle">Dispatches from the asylum</p>
       </div>
-      <div class="news-grid">
+      <div class="news-grid fade-in">
         <div class="news-card">
           <div class="date">January 2026</div>
           <h3>Welcome to Asylum Ward Studios</h3>
@@ -995,11 +1020,11 @@
   <!-- Contact Section -->
   <section id="contact">
     <div class="contact-container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <h2 class="section-title">Contact</h2>
         <p class="section-subtitle">Reach into the void</p>
       </div>
-      <form class="contact-form" action="https://formspree.io/f/xvzaqpbn" method="POST">
+      <form class="contact-form fade-in" action="https://formspree.io/f/xvzaqpbn" method="POST">
         <div class="form-row">
           <input type="text" name="name" placeholder="Name" class="input-field" required>
           <input type="email" name="email" placeholder="Email" class="input-field" required>
@@ -1086,6 +1111,18 @@
       particle.style.animationDelay = (i * 0.1) + 's';
       particlesContainer.appendChild(particle);
     }
+
+    // Scroll animations - fade in sections
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => fadeObserver.observe(el));
 
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
