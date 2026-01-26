@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
   <style>
-    /* Loading Animation - Static/Glitch */
+    /* Loading Animation - Red Door Glow */
     #loader {
       position: fixed;
       top: 0;
@@ -51,29 +51,46 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadeOut 0.3s ease-out 2.5s forwards;
-    }
-
-    #loader .static {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.15;
-      animation: staticFlicker 0.1s infinite, staticFadeOut 0.5s ease-out 2s forwards;
+      animation: fadeOut 0.5s ease-out 3s forwards;
     }
 
     #loader .logo-container {
       position: relative;
-      animation: glitchIn 2s ease-out forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     #loader img {
-      width: 120px;
-      height: 120px;
-      animation: logoGlitch 0.3s infinite;
+      width: 150px;
+      height: 150px;
+      opacity: 0.15;
+      animation: logoReveal 2.5s ease-out forwards;
+    }
+
+    #loader .door-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%);
+      width: 30px;
+      height: 50px;
+      background: radial-gradient(ellipse at center, rgba(196, 30, 58, 0.9) 0%, rgba(139, 0, 0, 0.5) 40%, transparent 70%);
+      opacity: 0;
+      animation: doorGlow 2.5s ease-out forwards;
+      filter: blur(8px);
+    }
+
+    #loader .light-spill {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -40%);
+      width: 300px;
+      height: 400px;
+      background: radial-gradient(ellipse at center top, rgba(196, 30, 58, 0.3) 0%, rgba(139, 0, 0, 0.1) 30%, transparent 60%);
+      opacity: 0;
+      animation: lightSpill 2s ease-out 1s forwards;
     }
 
     #loader .loader-text {
@@ -82,70 +99,35 @@
       font-weight: 400;
       color: #c41e3a;
       letter-spacing: 0.15em;
-      margin-top: 20px;
-      animation: textGlitch 0.3s infinite, textReveal 0.5s ease-out 1s forwards;
+      margin-top: 30px;
       opacity: 0;
+      animation: textFadeIn 1s ease-out 1.8s forwards;
     }
 
-    #loader .glitch-line {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: #c41e3a;
-      opacity: 0;
-      animation: glitchLine 0.2s infinite;
-    }
-
-    @keyframes staticFlicker {
-      0%, 100% { opacity: 0.15; }
-      25% { opacity: 0.1; }
-      50% { opacity: 0.2; }
-      75% { opacity: 0.05; }
-    }
-
-    @keyframes staticFadeOut {
-      0% { opacity: 0.15; }
-      100% { opacity: 0; }
-    }
-
-    @keyframes glitchIn {
-      0% { opacity: 0; transform: scale(0.9); }
-      10% { opacity: 0.5; transform: scale(1) translateX(-5px); }
-      20% { opacity: 0.3; transform: scale(1) translateX(5px); }
-      30% { opacity: 0.7; transform: scale(1.02) translateX(-3px); }
-      40% { opacity: 0.5; transform: scale(0.98) translateX(3px); }
-      50% { opacity: 1; transform: scale(1) translateX(0); }
-      100% { opacity: 1; transform: scale(1) translateX(0); }
-    }
-
-    @keyframes logoGlitch {
-      0%, 100% { transform: translateX(0); filter: none; }
-      20% { transform: translateX(-2px); filter: hue-rotate(90deg); }
-      40% { transform: translateX(2px); filter: none; }
-      60% { transform: translateX(-1px); filter: hue-rotate(-90deg); }
-      80% { transform: translateX(1px); filter: none; }
-    }
-
-    @keyframes textGlitch {
-      0%, 100% { transform: translateX(0); text-shadow: none; }
-      25% { transform: translateX(-2px); text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
-      50% { transform: translateX(2px); text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
-      75% { transform: translateX(-1px); text-shadow: 1px 0 #00ffff, -1px 0 #ff00ff; }
-    }
-
-    @keyframes textReveal {
-      0% { opacity: 0; }
+    @keyframes logoReveal {
+      0% { opacity: 0.05; }
+      30% { opacity: 0.15; }
+      70% { opacity: 0.5; }
       100% { opacity: 1; }
     }
 
-    @keyframes glitchLine {
-      0%, 100% { opacity: 0; top: 0; }
-      10% { opacity: 0.8; top: 20%; }
-      30% { opacity: 0; top: 40%; }
-      50% { opacity: 0.6; top: 60%; }
-      70% { opacity: 0; top: 80%; }
-      90% { opacity: 0.4; top: 90%; }
+    @keyframes doorGlow {
+      0% { opacity: 0; transform: translate(-50%, -45%) scale(0.5); }
+      30% { opacity: 0.3; transform: translate(-50%, -45%) scale(0.8); }
+      60% { opacity: 0.8; transform: translate(-50%, -45%) scale(1); }
+      80% { opacity: 1; transform: translate(-50%, -45%) scale(1.1); }
+      100% { opacity: 0.6; transform: translate(-50%, -45%) scale(1); }
+    }
+
+    @keyframes lightSpill {
+      0% { opacity: 0; transform: translate(-50%, -40%) scaleY(0.3); }
+      50% { opacity: 0.8; transform: translate(-50%, -40%) scaleY(1); }
+      100% { opacity: 0.4; transform: translate(-50%, -40%) scaleY(1.2); }
+    }
+
+    @keyframes textFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
     }
 
     @keyframes fadeOut {
@@ -828,9 +810,9 @@
 <body>
   <!-- Loading Animation -->
   <div id="loader">
-    <div class="static"></div>
-    <div class="glitch-line"></div>
     <div class="logo-container">
+      <div class="light-spill"></div>
+      <div class="door-glow"></div>
       <img src="AsylumWardLogo.png" alt="">
       <div class="loader-text">ASYLUM WARD STUDIOS</div>
     </div>
@@ -1054,7 +1036,7 @@
     setTimeout(() => {
       const loader = document.getElementById('loader');
       if (loader) loader.remove();
-    }, 3000);
+    }, 3500);
 
     // Modal functions
     function showModal() {
