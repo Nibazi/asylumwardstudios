@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asylum Ward Studios | Atmospheric Horror Games</title>
+  <meta name="description" content="Crafting atmospheric horror experiences where tension comes from mechanics, not jump scares.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #0a0a0c;
+      color: #e8e8e8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3d1a1a;
+      border-radius: 4px;
+    }
+
+    /* Animations */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      42% { opacity: 0.8; }
+      45% { opacity: 0.3; }
+      46% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanline overlay */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(10,10,12,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(139, 0, 0, 0.2);
+    }
+
+    .nav-logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: flicker 4s infinite;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #888;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #c41e3a;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #c41e3a, #8b0000);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(75, 0, 30, 0.2) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0a0c 0%, #12080a 50%, #0a0a0c 100%);
+    }
+
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #c41e3a;
+      border-radius: 50%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 40px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .hero-logo {
+      margin-bottom: 30px;
+      animation: flicker 5s infinite;
+    }
+
+    .hero-logo h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 8vw, 80px);
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero-logo .line {
+      width: 96%;
+      height: 1px;
+      background: #c41e3a;
+      margin: 15px auto;
+    }
+
+    .hero-logo .studios {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: clamp(14px, 2.5vw, 22px);
+      color: #888;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+
+    .hero-tagline {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(13px, 1.8vw, 17px);
+      color: #777;
+      max-width: 550px;
+      margin: 0 auto 45px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #8b0000, #c41e3a);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator div {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(196, 30, 58, 0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .scroll-indicator span {
+      width: 4px;
+      height: 8px;
+      background: #c41e3a;
+      border-radius: 2px;
+    }
+
+    /* Sections */
+    section {
+      padding: 120px 60px;
+      position: relative;
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 6vw, 64px);
+      color: transparent;
+      background: linear-gradient(180deg, #c41e3a, #4a0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(196, 30, 58, 0.3);
+      margin-bottom: 20px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-subtitle {
+      font-family: 'Special Elite', cursive;
+      color: #666;
+      font-size: 16px;
+      letter-spacing: 2px;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      border-radius: 4px;
+    }
+
+    .game-card:hover {
+      transform: scale(1.02);
+    }
+
+    .game-card-image {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      position: relative;
+    }
+
+    .game-card-image .glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .game-card-content {
+      padding: 25px;
+      background: linear-gradient(to bottom, transparent, rgba(10,10,12,0.9));
+    }
+
+    .game-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .game-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    .game-card .status {
+      background: rgba(196, 30, 58, 0.2);
+      color: #c41e3a;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .game-card .genre {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .game-card p {
+      color: #888;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0f0a0c 50%, #0a0a0c 100%);
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #c41e3a;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(135deg, rgba(20,20,25,0.8), rgba(15,15,18,0.8));
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    .stat-card .number {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 38px;
+      color: #c41e3a;
+      margin-bottom: 8px;
+      animation: flicker 3s infinite;
+    }
+
+    .stat-card .number.text {
+      font-size: 28px;
+    }
+
+    .stat-card .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #666;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* News Section */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .news-card {
+      background: linear-gradient(135deg, rgba(20,20,25,0.9), rgba(30,30,35,0.9));
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      padding: 35px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .news-card:hover {
+      border-color: rgba(196, 30, 58, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .news-card .date {
+      color: #c41e3a;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .news-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .news-card p {
+      color: #777;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0c0608 100%);
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .input-field {
+      background: rgba(20,20,25,0.8);
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      padding: 16px 20px;
+      color: #e8e8e8;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 16px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #c41e3a;
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+    }
+
+    .input-field::placeholder {
+      color: #555;
+    }
+
+    textarea.input-field {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-footer {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(139, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contact-email .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      color: #666;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .contact-email a {
+      color: #c41e3a;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: #888;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .social-icon:hover {
+      border-color: #c41e3a;
+      color: #c41e3a;
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid rgba(139, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    footer .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #c41e3a;
+      margin-bottom: 12px;
+      animation: flicker 4s infinite;
+      letter-spacing: 0.15em;
+    }
+
+    footer p {
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      .hero-logo h1 {
+        white-space: normal;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scanline Effect -->
+  <div class="scanline"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">
+      <svg viewBox="0 0 100 100" style="width: 44px; height: 44px;">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#c41e3a" stroke-width="2.5" opacity="0.9"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#8b0000" stroke-width="1" opacity="0.5"/>
+        <rect x="35" y="32" width="30" height="38" fill="#111" stroke="#666" stroke-width="0.8"/>
+        <polygon points="35,32 50,18 65,32" fill="#111" stroke="#666" stroke-width="0.8"/>
+        <rect x="44" y="50" width="12" height="20" fill="#8b0000"/>
+        <rect x="28" y="38" width="7" height="22" fill="#111" stroke="#555" stroke-width="0.5"/>
+        <rect x="65" y="38" width="7" height="22" fill="#111" stroke="#555" stroke-width="0.5"/>
+        <circle cx="50" cy="12" r="3" fill="#c41e3a" opacity="0.6"/>
+      </svg>
+      <span>ASYLUM WARD</span>
+    </a>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#games" class="nav-link">Games</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#news" class="nav-link">News</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <h1>ASYLUM WARD</h1>
+        <div class="line"></div>
+        <div class="studios">Studios</div>
+      </div>
+      <p class="hero-tagline">Crafting atmospheric horror experiences where tension comes from mechanics, not jump scares.</p>
+      <a href="#games" class="btn-primary">Explore Our Games</a>
+    </div>
+    <div class="scroll-indicator">
+      <div><span></span></div>
+    </div>
+  </section>
+
+  <!-- Games Section -->
+  <section id="games">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Our Games</h2>
+        <p class="section-subtitle">Systems-driven horror experiences</p>
+      </div>
+      <div class="games-grid">
+        <!-- Game 1 -->
+        <div class="game-card" style="background: linear-gradient(135deg, #1a2f1a, #0d1f0d); border: 1px solid rgba(45, 90, 45, 0.2);">
+          <div class="game-card-image" style="background: linear-gradient(135deg, #1a2f1a, #0d1f0d);">
+            <div class="glow" style="background: radial-gradient(circle at center, rgba(45, 90, 45, 0.13) 0%, transparent 70%);"></div>
+            <span>🌲</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>What's In The Woods</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre" style="color: #2d5a2d;">Horror</div>
+            <p>Venture into the darkness between the trees. Some secrets are better left undiscovered.</p>
+          </div>
+        </div>
+        <!-- Game 2 -->
+        <div class="game-card" style="background: linear-gradient(135deg, #2a2a35, #15151a); border: 1px solid rgba(74, 74, 90, 0.2);">
+          <div class="game-card-image" style="background: linear-gradient(135deg, #2a2a35, #15151a);">
+            <div class="glow" style="background: radial-gradient(circle at center, rgba(74, 74, 90, 0.13) 0%, transparent 70%);"></div>
+            <span>🚪</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>The Padded Room</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre" style="color: #4a4a5a;">Psychological Horror</div>
+            <p>Reality bends. Walls breathe. Trust nothing—especially yourself.</p>
+          </div>
+        </div>
+        <!-- Game 3 -->
+        <div class="game-card" style="background: linear-gradient(135deg, #2d1f3d, #1a1025); border: 1px solid rgba(90, 61, 122, 0.2);">
+          <div class="game-card-image" style="background: linear-gradient(135deg, #2d1f3d, #1a1025);">
+            <div class="glow" style="background: radial-gradient(circle at center, rgba(90, 61, 122, 0.13) 0%, transparent 70%);"></div>
+            <span>🔮</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>Occult Shop Simulator</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre" style="color: #5a3d7a;">Simulation</div>
+            <p>Run a supernatural emporium. Curate cursed artifacts. Satisfy customers from beyond the veil.</p>
+          </div>
+        </div>
+        <!-- Game 4 -->
+        <div class="game-card" style="background: linear-gradient(135deg, #3d2d1f, #251a10); border: 1px solid rgba(122, 90, 61, 0.2);">
+          <div class="game-card-image" style="background: linear-gradient(135deg, #3d2d1f, #251a10);">
+            <div class="glow" style="background: radial-gradient(circle at center, rgba(122, 90, 61, 0.13) 0%, transparent 70%);"></div>
+            <span>✨</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>Occult Shop Clicker</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre" style="color: #7a5a3d;">Idle/Clicker</div>
+            <p>Inherit a supernatural shop and sell goods across dimensions. Click, upgrade, and prestige your way to cosmic forges.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-subtitle">The minds behind the madness</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>Our Philosophy</h3>
+          <p>Atmospheric and psychological horror. Systems-driven experiences where tension comes from mechanics, not jump scares.</p>
+          <p>True horror emerges from uncertainty, consequence, and the spaces your mind fills in. Our games create dread through gameplay systems that keep you questioning every decision.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="number" style="animation-delay: 0s;">4</div>
+            <div class="label">Games In Dev</div>
+          </div>
+          <div class="stat-card">
+            <div class="number text" style="animation-delay: 0.5s;">Minimal</div>
+            <div class="label">Jump Scares</div>
+          </div>
+          <div class="stat-card">
+            <div class="number" style="animation-delay: 1s;">∞</div>
+            <div class="label">Tension</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section id="news">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">News</h2>
+        <p class="section-subtitle">Dispatches from the asylum</p>
+      </div>
+      <div class="news-grid">
+        <div class="news-card">
+          <div class="date">Coming Soon</div>
+          <h3>Development Update: What's In The Woods</h3>
+          <p>A deep dive into environmental storytelling and procedural tension mechanics.</p>
+        </div>
+        <div class="news-card">
+          <div class="date">Coming Soon</div>
+          <h3>The Art of Atmospheric Horror</h3>
+          <p>How we create dread without cheap tricks—our design philosophy explained.</p>
+        </div>
+        <div class="news-card">
+          <div class="date">Coming Soon</div>
+          <h3>Studio Announcement</h3>
+          <p>Exciting news about upcoming projects and the future of Asylum Ward Studios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <div class="section-header">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">Reach into the void</p>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Name" class="input-field" required>
+          <input type="email" name="email" placeholder="Email" class="input-field" required>
+        </div>
+        <input type="text" name="subject" placeholder="Subject" class="input-field">
+        <textarea name="message" placeholder="Your message..." class="input-field" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+      <div class="contact-footer">
+        <div class="contact-email">
+          <div class="label">Email Us</div>
+          <a href="mailto:admin@asylumwardstudios.com">admin@asylumwardstudios.com</a>
+        </div>
+        <div class="social-links">
+          <a href="https://x.com/AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon">X</a>
+          <a href="https://instagram.com/AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon">IG</a>
+          <a href="https://youtube.com/@AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon">YT</a>
+          <a href="https://tiktok.com/@AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon">TT</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="logo">ASYLUM WARD STUDIOS</div>
+    <p>© 2025 Asylum Ward Studios. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Create particles
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = (10 + (i * 4.5)) + '%';
+      particle.style.top = (15 + (i * 4)) + '%';
+      particle.style.opacity = 0.3 + (i % 3) * 0.2;
+      particle.style.animationDuration = (3 + (i % 4)) + 's';
+      particle.style.animationDelay = (i * 0.1) + 's';
+      particlesContainer.appendChild(particle);
+    }
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Contact form (placeholder - connect to your backend)
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message! We\'ll get back to you soon.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
