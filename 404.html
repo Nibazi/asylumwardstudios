@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Asylum Ward Studios</title>
+  <meta name="description" content="The page you're looking for has vanished into the void.">
+  <link rel="icon" type="image/png" href="AsylumWardLogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #0a0a0c;
+      color: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+      max-width: 600px;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 40px;
+      animation: flicker 4s infinite;
+    }
+
+    .error-code {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(80px, 20vw, 150px);
+      font-weight: 400;
+      color: transparent;
+      background: linear-gradient(180deg, #c41e3a, #4a0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      letter-spacing: 0.15em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .error-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .error-message {
+      font-family: 'Special Elite', cursive;
+      font-size: 18px;
+      color: #777;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .btn-home {
+      background: linear-gradient(135deg, #8b0000, #c41e3a);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-home:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      42% { opacity: 0.8; }
+      45% { opacity: 0.3; }
+      46% { opacity: 1; }
+    }
+
+    /* Scanline overlay */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* Background effects */
+    .bg-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(75, 0, 30, 0.2) 0%, transparent 50%);
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+  <div class="bg-effects"></div>
+  
+  <div class="container">
+    <img src="AsylumWardLogo.png" alt="" class="logo">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-message">The page you seek has vanished into the void. Perhaps it was never meant to be found...</p>
+    <a href="/" class="btn-home">Return to Safety</a>
+  </div>
+</body>
+</html>
