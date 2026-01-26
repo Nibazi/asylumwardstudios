@@ -461,6 +461,9 @@
       cursor: pointer;
       transition: transform 0.4s ease;
       border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .game-card:hover {
@@ -474,6 +477,7 @@
       justify-content: center;
       font-size: 56px;
       position: relative;
+      flex-shrink: 0;
     }
 
     .game-card-image .glow {
@@ -486,7 +490,14 @@
 
     .game-card-content {
       padding: 25px;
-      background: linear-gradient(to bottom, transparent, rgba(10,10,12,0.9));
+      background: rgba(10,10,12,0.9);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card-content p {
+      margin-top: auto;
     }
 
     .game-card-header {
