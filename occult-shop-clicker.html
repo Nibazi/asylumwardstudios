@@ -444,44 +444,69 @@
       line-height: 1.7;
     }
 
-    /* Screenshots Section - Bento Grid */
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 15px;
+    /* Screenshots Section - Overlapping Cards */
+    .screenshots-container {
+      position: relative;
+      height: 600px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .screenshot {
-      position: relative;
+      position: absolute;
+      width: 55%;
       overflow: hidden;
       border: 1px solid rgba(157, 124, 216, 0.3);
       border-radius: 4px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .screenshot:hover {
+      z-index: 100 !important;
+      transform: scale(1.05) rotate(0deg) !important;
       border-color: var(--accent);
-      transform: scale(1.02);
-      box-shadow: 0 0 30px rgba(157, 124, 216, 0.3);
+      box-shadow: 0 20px 60px rgba(157, 124, 216, 0.4);
     }
 
     .screenshot img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
     }
 
-    .screenshot.featured {
-      grid-row: span 2;
+    .screenshot:nth-child(1) {
+      top: 0;
+      left: 5%;
+      transform: rotate(-3deg);
+      z-index: 4;
+    }
+
+    .screenshot:nth-child(2) {
+      top: 30px;
+      right: 5%;
+      transform: rotate(2deg);
+      z-index: 3;
+    }
+
+    .screenshot:nth-child(3) {
+      top: 180px;
+      left: 15%;
+      transform: rotate(1.5deg);
+      z-index: 2;
+    }
+
+    .screenshot:nth-child(4) {
+      top: 220px;
+      right: 10%;
+      transform: rotate(-2deg);
+      z-index: 1;
     }
 
     .screenshot-placeholder {
       width: 100%;
-      height: 100%;
-      min-height: 200px;
+      aspect-ratio: 16/9;
       background: linear-gradient(135deg, #1a1520, #0f0a15);
       display: flex;
       align-items: center;
@@ -493,26 +518,22 @@
       padding: 20px;
     }
 
-    .screenshot.featured .screenshot-placeholder {
-      min-height: 430px;
-    }
-
     .screenshot-label {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 15px;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 12px 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
       color: #aaa;
       font-size: 14px;
       letter-spacing: 1px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .screenshot:hover .screenshot-label {
-      transform: translateY(0);
+      opacity: 1;
     }
 
     /* Stats Section */
@@ -758,16 +779,26 @@
         padding: 60px 20px;
       }
 
-      .screenshots-grid {
-        grid-template-columns: 1fr;
+      .screenshots-container {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
       }
 
-      .screenshot.featured {
-        grid-row: span 1;
+      .screenshot {
+        position: relative;
+        width: 100%;
+        transform: none !important;
       }
 
-      .screenshot.featured .screenshot-placeholder {
-        min-height: 200px;
+      .screenshot:nth-child(1),
+      .screenshot:nth-child(2),
+      .screenshot:nth-child(3),
+      .screenshot:nth-child(4) {
+        top: auto;
+        left: auto;
+        right: auto;
       }
 
       .features-grid {
@@ -883,9 +914,9 @@
   <!-- Screenshots Section -->
   <section id="screenshots">
     <div class="section-container">
-      <h2 class="section-title">Screenshots</h2>
-      <div class="screenshots-grid">
-        <div class="screenshot featured">
+      <h2 class="section-title" style="text-align: center;">Screenshots</h2>
+      <div class="screenshots-container">
+        <div class="screenshot">
           <img src="images/osc/screenshot-1.png" alt="Main gameplay view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY VIEW</div>'">
           <div class="screenshot-label">Main Gameplay View</div>
         </div>
@@ -897,14 +928,8 @@
           <img src="images/osc/screenshot-3.png" alt="Prestige panel" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>PRESTIGE SYSTEM</div>'">
           <div class="screenshot-label">Prestige System</div>
         </div>
-      </div>
-      <div class="screenshots-grid" style="grid-template-columns: 1fr 2fr; margin-top: 15px;">
         <div class="screenshot">
-          <img src="images/osc/screenshot-4.png" alt="Achievements" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>ACHIEVEMENTS</div>'">
-          <div class="screenshot-label">Achievements</div>
-        </div>
-        <div class="screenshot featured">
-          <img src="images/osc/screenshot-5.png" alt="Late-game view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>LATE-GAME VIEW</div>'">
+          <img src="images/osc/screenshot-4.png" alt="Late-game view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>LATE-GAME VIEW</div>'">
           <div class="screenshot-label">Late-Game View</div>
         </div>
       </div>
