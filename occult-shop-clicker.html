@@ -626,6 +626,75 @@
       text-decoration: underline;
     }
 
+    /* Screenshot Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 1px solid rgba(157, 124, 216, 0.3);
+      border-radius: 4px;
+      cursor: default;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      font-family: sans-serif;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--accent);
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      user-select: none;
+      padding: 20px;
+    }
+
+    .modal-nav:hover {
+      color: var(--accent);
+    }
+
+    .modal-prev {
+      left: 10px;
+    }
+
+    .modal-next {
+      right: 10px;
+    }
+
     /* Responsive */
     @media (max-width: 992px) {
       .about-content {
@@ -903,6 +972,80 @@
     <p><a href="index.html">← Back to Main Site</a></p>
     <p style="margin-top: 15px;">© 2026 Asylum Ward Studios. All rights reserved.</p>
   </footer>
+
+  <!-- Screenshot Modal -->
+  <div class="modal" id="screenshotModal">
+    <span class="modal-close">&times;</span>
+    <span class="modal-nav modal-prev">&#10094;</span>
+    <span class="modal-nav modal-next">&#10095;</span>
+    <img src="" alt="Screenshot" id="modalImage">
+  </div>
+
+  <script>
+    // Screenshot Modal
+    const modal = document.getElementById('screenshotModal');
+    const modalImg = document.getElementById('modalImage');
+    const screenshots = document.querySelectorAll('.screenshot img');
+    const screenshotSrcs = [];
+    let currentIndex = 0;
+
+    // Collect all screenshot sources
+    screenshots.forEach((img, index) => {
+      if (img.src && !img.src.includes('undefined')) {
+        screenshotSrcs.push(img.src);
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          currentIndex = index;
+          openModal(img.src);
+        });
+      }
+    });
+
+    function openModal(src) {
+      modal.classList.add('active');
+      modalImg.src = src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = screenshotSrcs.length - 1;
+      if (currentIndex >= screenshotSrcs.length) currentIndex = 0;
+      modalImg.src = screenshotSrcs[currentIndex];
+    }
+
+    // Close on X click
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Navigation
+    document.querySelector('.modal-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(-1);
+    });
+
+    document.querySelector('.modal-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(1);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
 
 </body>
 </html>
