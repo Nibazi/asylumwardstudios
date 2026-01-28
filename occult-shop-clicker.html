@@ -444,30 +444,36 @@
       line-height: 1.7;
     }
 
-    /* Screenshots Section - Overlapping Cards */
+    /* Screenshots Section - Fanned Cards */
     .screenshots-container {
       position: relative;
-      height: 600px;
+      height: 550px;
       max-width: 1000px;
       margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
     }
 
     .screenshot {
       position: absolute;
-      width: 55%;
+      width: 45%;
+      max-width: 400px;
       overflow: hidden;
-      border: 1px solid rgba(157, 124, 216, 0.3);
-      border-radius: 4px;
+      border: 2px solid rgba(157, 124, 216, 0.3);
+      border-radius: 8px;
       cursor: pointer;
       transition: all 0.4s ease;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+      transform-origin: center bottom;
+      bottom: 0;
     }
 
     .screenshot:hover {
       z-index: 100 !important;
-      transform: scale(1.05) rotate(0deg) !important;
+      margin-bottom: 30px;
       border-color: var(--accent);
-      box-shadow: 0 20px 60px rgba(157, 124, 216, 0.4);
+      box-shadow: 0 25px 70px rgba(157, 124, 216, 0.5);
     }
 
     .screenshot img {
@@ -477,31 +483,39 @@
     }
 
     .screenshot:nth-child(1) {
-      top: 0;
-      left: 5%;
-      transform: rotate(-3deg);
-      z-index: 4;
+      transform: rotate(-15deg) translateX(-120%);
+      z-index: 1;
+    }
+
+    .screenshot:nth-child(1):hover {
+      transform: rotate(-12deg) translateX(-120%) scale(1.05);
     }
 
     .screenshot:nth-child(2) {
-      top: 30px;
-      right: 5%;
-      transform: rotate(2deg);
-      z-index: 3;
-    }
-
-    .screenshot:nth-child(3) {
-      top: 180px;
-      left: 15%;
-      transform: rotate(1.5deg);
+      transform: rotate(-5deg) translateX(-40%);
       z-index: 2;
     }
 
+    .screenshot:nth-child(2):hover {
+      transform: rotate(-3deg) translateX(-40%) scale(1.05);
+    }
+
+    .screenshot:nth-child(3) {
+      transform: rotate(5deg) translateX(40%);
+      z-index: 2;
+    }
+
+    .screenshot:nth-child(3):hover {
+      transform: rotate(3deg) translateX(40%) scale(1.05);
+    }
+
     .screenshot:nth-child(4) {
-      top: 220px;
-      right: 10%;
-      transform: rotate(-2deg);
+      transform: rotate(15deg) translateX(120%);
       z-index: 1;
+    }
+
+    .screenshot:nth-child(4):hover {
+      transform: rotate(12deg) translateX(120%) scale(1.05);
     }
 
     .screenshot-placeholder {
@@ -784,21 +798,14 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        align-items: center;
       }
 
       .screenshot {
         position: relative;
         width: 100%;
+        max-width: 100%;
         transform: none !important;
-      }
-
-      .screenshot:nth-child(1),
-      .screenshot:nth-child(2),
-      .screenshot:nth-child(3),
-      .screenshot:nth-child(4) {
-        top: auto;
-        left: auto;
-        right: auto;
       }
 
       .features-grid {
