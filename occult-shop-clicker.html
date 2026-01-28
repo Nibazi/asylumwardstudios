@@ -447,12 +447,12 @@
     /* Screenshots Section - Fanned Cards */
     .screenshots-container {
       position: relative;
-      height: 550px;
+      height: 480px;
       max-width: 1000px;
       margin: 0 auto;
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: flex-start;
     }
 
     .screenshot {
@@ -465,13 +465,12 @@
       cursor: pointer;
       transition: all 0.4s ease;
       box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-      transform-origin: center bottom;
-      bottom: 0;
+      transform-origin: center top;
+      top: 0;
     }
 
     .screenshot:hover {
       z-index: 100 !important;
-      margin-bottom: 30px;
       border-color: var(--accent);
       box-shadow: 0 25px 70px rgba(157, 124, 216, 0.5);
     }
@@ -488,7 +487,7 @@
     }
 
     .screenshot:nth-child(1):hover {
-      transform: rotate(-12deg) translateX(-120%) scale(1.05);
+      transform: rotate(-12deg) translateX(-120%) scale(1.08);
     }
 
     .screenshot:nth-child(2) {
@@ -497,7 +496,7 @@
     }
 
     .screenshot:nth-child(2):hover {
-      transform: rotate(-3deg) translateX(-40%) scale(1.05);
+      transform: rotate(-3deg) translateX(-40%) scale(1.08);
     }
 
     .screenshot:nth-child(3) {
@@ -506,7 +505,7 @@
     }
 
     .screenshot:nth-child(3):hover {
-      transform: rotate(3deg) translateX(40%) scale(1.05);
+      transform: rotate(3deg) translateX(40%) scale(1.08);
     }
 
     .screenshot:nth-child(4) {
@@ -515,7 +514,7 @@
     }
 
     .screenshot:nth-child(4):hover {
-      transform: rotate(12deg) translateX(120%) scale(1.05);
+      transform: rotate(12deg) translateX(120%) scale(1.08);
     }
 
     .screenshot-placeholder {
@@ -921,7 +920,7 @@
   <!-- Screenshots Section -->
   <section id="screenshots">
     <div class="section-container">
-      <h2 class="section-title" style="text-align: center;">Screenshots</h2>
+      <h2 class="section-title" style="text-align: center; margin-bottom: 45px;">Screenshots</h2>
       <div class="screenshots-container">
         <div class="screenshot">
           <img src="images/osc/screenshot-1.png" alt="Main gameplay view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY VIEW</div>'">
