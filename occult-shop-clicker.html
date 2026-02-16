@@ -144,6 +144,23 @@
       --gold-dark: #7a5a3d;
     }
 
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      padding: 10px 20px;
+      z-index: 100000;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
     /* Animations */
     @keyframes flicker {
       0%, 100% { opacity: 1; }
@@ -370,6 +387,15 @@
       color: var(--accent);
       margin-bottom: 30px;
       letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .accent-text {
+      color: var(--accent);
+    }
+
+    #screenshots .section-title {
+      margin-bottom: 45px;
     }
 
     /* Welcome Section */
@@ -736,6 +762,10 @@
       margin-bottom: 15px;
     }
 
+    footer p + p {
+      margin-top: 15px;
+    }
+
     footer .studio-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
@@ -985,6 +1015,8 @@
   <!-- Scanline Effect -->
   <div class="scanline"></div>
 
+  <a href="#welcome" class="skip-link">Skip to content</a>
+
   <!-- Navigation -->
   <nav>
     <a href="index.html" class="nav-logo">
@@ -997,7 +1029,7 @@
       <a href="index.html#about" class="nav-link">About</a>
       <a href="index.html#contact" class="nav-link">Contact</a>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -1031,9 +1063,9 @@
   <section id="welcome">
     <div class="section-container">
       <div class="welcome-content">
-        <h2 class="section-title" style="text-align: center;">Welcome to your new occult shop.</h2>
+        <h2 class="section-title">Welcome to your new occult shop.</h2>
         <p>You've inherited a dusty storefront filled with cursed merchandise, haunted inventory, and a cash register that definitely shouldn't be glowing like that. Click it anyway.</p>
-        <p><strong style="color: var(--accent);">Occult Shop Clicker</strong> is an incremental idle game where you run a supernatural shop, accumulate spectral wealth, and progressively unlock deeper layers of cosmic power.</p>
+        <p><strong class="accent-text">Occult Shop Clicker</strong> is an incremental idle game where you run a supernatural shop, accumulate spectral wealth, and progressively unlock deeper layers of cosmic power.</p>
         <p class="italic">It's a clicker game. You click things. Numbers get bigger. It's satisfying.</p>
       </div>
     </div>
@@ -1066,7 +1098,7 @@
   <!-- Prestige Section -->
   <section id="prestige">
     <div class="section-container">
-      <h2 class="section-title" style="text-align: center;">Three Layers of Prestige</h2>
+      <h2 class="section-title">Three Layers of Prestige</h2>
       <p class="prestige-intro">When the numbers get big enough, sacrifice everything for permanent power:</p>
       <div class="prestige-grid">
         <div class="prestige-card">
@@ -1091,7 +1123,7 @@
   <!-- Screenshots Section -->
   <section id="screenshots">
     <div class="section-container">
-      <h2 class="section-title" style="text-align: center; margin-bottom: 45px;">Screenshots</h2>
+      <h2 class="section-title">Screenshots</h2>
       <div class="screenshots-container">
         <div class="screenshot">
           <img src="images/osc/screenshot-1.png" alt="Main gameplay view" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY VIEW</div>'">
@@ -1116,7 +1148,7 @@
   <!-- Stats Section -->
   <section id="stats">
     <div class="section-container">
-      <h2 class="section-title" style="text-align: center;">Upgrades, Milestones, Achievements</h2>
+      <h2 class="section-title">Upgrades, Milestones, Achievements</h2>
       <div class="stats-grid">
         <div class="stat-item">
           <div class="number">174</div>
@@ -1221,7 +1253,7 @@
     <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" loading="lazy">
     <div class="studio-name">ASYLUM WARD STUDIOS</div>
     <p><a href="index.html">← Back to Main Site</a></p>
-    <p style="margin-top: 15px;">© 2026 Asylum Ward Studios. All rights reserved.</p>
+    <p>© 2026 Asylum Ward Studios. All rights reserved.</p>
   </footer>
 
   <!-- Screenshot Modal -->
@@ -1237,25 +1269,28 @@
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
 
+    function closeMobileNav() {
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       mobileNav.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+      const isOpen = mobileNav.classList.contains('active');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
     mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      link.addEventListener('click', closeMobileNav);
     });
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
+        closeMobileNav();
       }
     });
 
@@ -1267,12 +1302,13 @@
     let currentIndex = 0;
 
     // Collect all screenshot sources
-    screenshots.forEach((img, index) => {
+    screenshots.forEach((img) => {
       if (img.src && !img.src.includes('undefined')) {
+        const srcIndex = screenshotSrcs.length;
         screenshotSrcs.push(img.src);
         img.style.cursor = 'pointer';
         img.addEventListener('click', () => {
-          currentIndex = index;
+          currentIndex = srcIndex;
           openModal(img.src);
         });
       }
@@ -1320,12 +1356,22 @@
       navigate(1);
     });
 
-    // Keyboard navigation
+    // Keyboard navigation + focus trap
+    const modalFocusable = modal.querySelectorAll('button');
     document.addEventListener('keydown', (e) => {
       if (!modal.classList.contains('active')) return;
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'Tab') {
+        const first = modalFocusable[0];
+        const last = modalFocusable[modalFocusable.length - 1];
+        if (e.shiftKey) {
+          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
     });
   </script>
 
