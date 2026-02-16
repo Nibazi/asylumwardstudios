@@ -1250,7 +1250,7 @@
 
   <!-- Footer -->
   <footer>
-    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" loading="lazy">
+    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" loading="lazy" width="50" height="50">
     <div class="studio-name">ASYLUM WARD STUDIOS</div>
     <p><a href="index.html">← Back to Main Site</a></p>
     <p>© 2026 Asylum Ward Studios. All rights reserved.</p>
@@ -1316,10 +1316,15 @@
 
     let lastFocused = null;
 
+    function updateModalAlt() {
+      modalImg.alt = 'Screenshot ' + (currentIndex + 1) + ' of ' + screenshotSrcs.length;
+    }
+
     function openModal(src) {
       lastFocused = document.activeElement;
       modal.classList.add('active');
       modalImg.src = src;
+      updateModalAlt();
       document.body.style.overflow = 'hidden';
       document.querySelector('.modal-close').focus();
     }
@@ -1335,6 +1340,7 @@
       if (currentIndex < 0) currentIndex = screenshotSrcs.length - 1;
       if (currentIndex >= screenshotSrcs.length) currentIndex = 0;
       modalImg.src = screenshotSrcs[currentIndex];
+      updateModalAlt();
     }
 
     // Close on X click
