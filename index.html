@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO -->
+  <title>Asylum Ward Studios | Indie Horror Game Developer | Atmospheric & Psychological Horror Games</title>
+  <meta name="description" content="Asylum Ward Studios is an indie game studio crafting atmospheric and psychological horror experiences. Explore our upcoming titles including Occult Shop Clicker, The Padded Room, Occult Shop Simulator, and What's In The Woods. We create tension through game mechanics, not cheap jump scares. Upcoming horror games 2026.">
+  <meta name="keywords" content="indie games, horror games, atmospheric horror, psychological horror, indie game studio, Asylum Ward Studios, Occult Shop Clicker, The Padded Room, What's In The Woods, Occult Shop Simulator, co-op horror, multiplayer horror, upcoming horror games, horror games 2026, new horror games, indie horror 2026, scary games, creepy games, tension horror, survival horror, occult games, supernatural games, idle horror game, clicker game, horror clicker, spooky games, dark games, indie dev, game developer, horror game developer, pc horror games, steam horror games, best indie horror, upcoming indie games, new indie games 2026, psychological thriller games, mind bending games, horror simulation, creepy simulation game, paranormal games">
+  <meta name="author" content="Asylum Ward Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.asylumwardstudios.com/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.asylumwardstudios.com/">
+  <meta property="og:title" content="Asylum Ward Studios | Indie Horror Game Developer">
+  <meta property="og:description" content="Indie game studio crafting atmospheric and psychological horror games. Upcoming titles: Occult Shop Clicker, The Padded Room, and more. New horror games coming 2026.">
+  <meta property="og:image" content="https://www.asylumwardstudios.com/AsylumWardLogo.png">
+  <meta property="og:site_name" content="Asylum Ward Studios">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@AsylumWardStudios">
+  <meta name="twitter:url" content="https://www.asylumwardstudios.com/">
+  <meta name="twitter:title" content="Asylum Ward Studios | Indie Horror Game Developer">
+  <meta name="twitter:description" content="Indie studio creating atmospheric and psychological horror games. Occult Shop Clicker, The Padded Room & more coming 2026.">
+  <meta name="twitter:image" content="https://www.asylumwardstudios.com/AsylumWardLogo.png">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#0a0a0c">
+  <meta name="msapplication-TileColor" content="#c41e3a">
+  <link rel="icon" type="image/png" sizes="32x32" href="AsylumWardLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="AsylumWardLogo.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="AsylumWardLogo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Asylum Ward Studios",
+    "url": "https://www.asylumwardstudios.com",
+    "logo": "https://www.asylumwardstudios.com/AsylumWardLogo.png",
+    "description": "Indie game studio crafting atmospheric and psychological horror experiences.",
+    "email": "contact@asylumwardstudios.com",
+    "sameAs": [
+      "https://x.com/AsylumWardStudios",
+      "https://instagram.com/AsylumWardStudios",
+      "https://youtube.com/@AsylumWardStudios",
+      "https://tiktok.com/@AsylumWardStudios"
+    ]
+  }
+  </script>
+
+  <style>
+    /* Loading Animation - Red Door Glow */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #0a0a0c;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeOut 0.5s ease-out 3s forwards;
+    }
+
+    #loader .logo-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #loader img {
+      width: 150px;
+      height: 150px;
+      opacity: 0.15;
+      animation: logoReveal 2.5s ease-out forwards;
+    }
+
+    #loader .door-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%);
+      width: 80px;
+      height: 100px;
+      background: radial-gradient(ellipse at center, rgba(255, 50, 50, 1) 0%, rgba(196, 30, 58, 0.8) 30%, transparent 70%);
+      opacity: 0;
+      animation: doorGlow 2.5s ease-out forwards;
+      filter: blur(20px);
+      border-radius: 50%;
+    }
+
+    #loader .light-spill {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -20%);
+      width: 300px;
+      height: 400px;
+      background: radial-gradient(ellipse at 50% 20%, rgba(196, 30, 58, 0.6) 0%, rgba(139, 0, 0, 0.3) 25%, transparent 55%);
+      opacity: 0;
+      animation: lightSpill 2s ease-out 1s forwards;
+      filter: blur(15px);
+    }
+
+    #loader .loader-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+      margin-top: 30px;
+      opacity: 0;
+      animation: textFadeIn 1s ease-out 1.8s forwards;
+    }
+
+    @keyframes logoReveal {
+      0% { opacity: 0.05; }
+      30% { opacity: 0.15; }
+      70% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes doorGlow {
+      0% { opacity: 0; }
+      30% { opacity: 0.5; }
+      60% { opacity: 0.9; }
+      80% { opacity: 1; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes lightSpill {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    @keyframes textFadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
+    }
+
+    /* Scroll Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glowing Buttons */
+    .btn-primary {
+      background: linear-gradient(135deg, #8b0000, #c41e3a);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 15px, 100% 100%, 15px 100%, 0 calc(100% - 15px));
+      text-decoration: none;
+      display: inline-block;
+      animation: buttonPulse 2s infinite;
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(196, 30, 58, 0.6);
+      animation: none;
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(196, 30, 58, 0.3); }
+      50% { box-shadow: 0 0 35px rgba(196, 30, 58, 0.6); }
+    }
+
+    /* Game Card Hover Glow */
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 0 0 rgba(196, 30, 58, 0);
+    }
+
+    .game-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 30px rgba(196, 30, 58, 0.5), 0 0 60px rgba(196, 30, 58, 0.2);
+    }
+
+    /* Section Title */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 6vw, 64px);
+      color: transparent;
+      background: linear-gradient(180deg, #c41e3a, #4a0000);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(196, 30, 58, 0.3);
+      margin-bottom: 20px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #0a0a0c;
+      color: #e8e8e8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3d1a1a;
+      border-radius: 4px;
+    }
+
+    /* Animations */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      42% { opacity: 0.8; }
+      45% { opacity: 0.3; }
+      46% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanline overlay */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(10,10,12,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(139, 0, 0, 0.2);
+    }
+
+    .nav-logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #888;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #c41e3a;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #c41e3a, #8b0000);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 80%, rgba(139, 0, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(75, 0, 30, 0.2) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0a0c 0%, #12080a 50%, #0a0a0c 100%);
+    }
+
+    .fog-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .fog {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      background: 
+        radial-gradient(ellipse at 20% 50%, rgba(139, 0, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(60, 60, 70, 0.1) 0%, transparent 40%),
+        radial-gradient(ellipse at 40% 70%, rgba(139, 0, 0, 0.06) 0%, transparent 45%);
+      opacity: 0.8;
+    }
+
+    .fog-1 {
+      animation: fogDrift 15s linear infinite;
+    }
+
+    .fog-2 {
+      animation: fogDrift 20s linear infinite reverse;
+      opacity: 0.5;
+    }
+
+    .fog-3 {
+      animation: fogDrift 12s linear infinite;
+      animation-delay: -5s;
+      opacity: 0.6;
+      background: 
+        radial-gradient(ellipse at 60% 40%, rgba(80, 80, 90, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 80%, rgba(139, 0, 0, 0.05) 0%, transparent 40%);
+    }
+
+    @keyframes fogDrift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 40px;
+      animation: slideIn 1s ease-out;
+    }
+
+    .hero-logo {
+      margin-bottom: 30px;
+      animation: flicker 5s infinite;
+    }
+
+    .hero-logo h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 8vw, 80px);
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero-logo .line {
+      width: 96%;
+      height: 1px;
+      background: #c41e3a;
+      margin: 15px auto;
+    }
+
+    .hero-logo .studios {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: clamp(18px, 3vw, 28px);
+      color: #888;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+    }
+
+    .hero-tagline {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(16px, 2.2vw, 22px);
+      color: #777;
+      max-width: 550px;
+      margin: 0 auto 45px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .scroll-indicator div {
+      width: 24px;
+      height: 40px;
+      border: 2px solid rgba(196, 30, 58, 0.5);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      padding-top: 8px;
+    }
+
+    .scroll-indicator span {
+      width: 4px;
+      height: 8px;
+      background: #c41e3a;
+      border-radius: 2px;
+    }
+
+    /* Sections */
+    section {
+      padding: 120px 60px;
+      position: relative;
+    }
+
+    .section-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-subtitle {
+      font-family: 'Special Elite', cursive;
+      color: #666;
+      font-size: 22px;
+      letter-spacing: 2px;
+    }
+
+    /* Games Grid */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .game-card-image {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .game-card-image .glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .game-card-content {
+      padding: 25px;
+      background: rgba(10,10,12,0.9);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-card-content p {
+      margin-top: auto;
+    }
+
+    .game-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .game-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
+    }
+
+    .game-card .status {
+      background: rgba(196, 30, 58, 0.2);
+      color: #c41e3a;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .game-card .genre {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .game-card p {
+      color: #888;
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0f0a0c 50%, #0a0a0c 100%);
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #c41e3a;
+      margin-bottom: 20px;
+    }
+
+    .about-text p {
+      color: #999;
+      font-size: 19px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-text p:last-child {
+      color: #777;
+      font-size: 18px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 25px 10px;
+      background: linear-gradient(135deg, rgba(20,20,25,0.8), rgba(15,15,18,0.8));
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+
+    .stat-card .number {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 38px;
+      color: #c41e3a;
+      margin-bottom: 8px;
+      animation: flicker 3s infinite;
+    }
+
+    .stat-card .number.text {
+      font-size: 28px;
+    }
+
+    .stat-card .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: #666;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* News Section */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .news-card {
+      background: linear-gradient(135deg, rgba(20,20,25,0.9), rgba(30,30,35,0.9));
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      padding: 35px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .news-card:hover {
+      border-color: rgba(196, 30, 58, 0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .news-card .date {
+      color: #c41e3a;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .news-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .news-card p {
+      color: #777;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0c0608 100%);
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .input-field {
+      background: rgba(20,20,25,0.8);
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      padding: 16px 20px;
+      color: #e8e8e8;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #c41e3a;
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+    }
+
+    .input-field::placeholder {
+      color: #555;
+    }
+
+    textarea.input-field {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-footer {
+      margin-top: 80px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(139, 0, 0, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contact-email .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 18px;
+      color: #666;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .contact-email a {
+      color: #c41e3a;
+      text-decoration: none;
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      color: #888;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .social-icon:hover {
+      border-color: #c41e3a;
+      color: #c41e3a;
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid rgba(139, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    footer .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      color: #c41e3a;
+      margin-bottom: 12px;
+      letter-spacing: 0.15em;
+    }
+
+    footer p {
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* Screen reader only */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Game Card Link */
+    .game-card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Game Card Themes */
+    .game-card-osc {
+      background: linear-gradient(135deg, #3d2d1f, #251a10);
+      border: 1px solid rgba(122, 90, 61, 0.2);
+    }
+    .game-card-osc .game-card-image {
+      background: linear-gradient(135deg, #3d2d1f, #251a10);
+    }
+    .game-card-osc .glow {
+      background: radial-gradient(circle at center, rgba(122, 90, 61, 0.13) 0%, transparent 70%);
+    }
+    .game-card-osc .genre { color: #7a5a3d; }
+
+    .game-card-tpr {
+      background: linear-gradient(135deg, #2a2a35, #15151a);
+      border: 1px solid rgba(74, 74, 90, 0.2);
+    }
+    .game-card-tpr .game-card-image {
+      background: linear-gradient(135deg, #2a2a35, #15151a);
+    }
+    .game-card-tpr .glow {
+      background: radial-gradient(circle at center, rgba(74, 74, 90, 0.13) 0%, transparent 70%);
+    }
+    .game-card-tpr .genre { color: #4a4a5a; }
+
+    .game-card-oss {
+      background: linear-gradient(135deg, #2d1f3d, #1a1025);
+      border: 1px solid rgba(90, 61, 122, 0.2);
+    }
+    .game-card-oss .game-card-image {
+      background: linear-gradient(135deg, #2d1f3d, #1a1025);
+    }
+    .game-card-oss .glow {
+      background: radial-gradient(circle at center, rgba(90, 61, 122, 0.13) 0%, transparent 70%);
+    }
+    .game-card-oss .genre { color: #5a3d7a; }
+
+    .game-card-witw {
+      background: linear-gradient(135deg, #1a2f1a, #0d1f0d);
+      border: 1px solid rgba(45, 90, 45, 0.2);
+    }
+    .game-card-witw .game-card-image {
+      background: linear-gradient(135deg, #1a2f1a, #0d1f0d);
+    }
+    .game-card-witw .glow {
+      background: radial-gradient(circle at center, rgba(45, 90, 45, 0.13) 0%, transparent 70%);
+    }
+    .game-card-witw .genre { color: #2d5a2d; }
+
+    .game-card-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      color: #888;
+      letter-spacing: 0.1em;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1002;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: #c41e3a;
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 10, 12, 0.98);
+      z-index: 1001;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: #888;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-nav a:hover {
+      color: #c41e3a;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      section {
+        padding: 80px 20px;
+      }
+
+      .hero-logo h1 {
+        white-space: normal;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div id="loader">
+    <div class="logo-container">
+      <div class="light-spill"></div>
+      <div class="door-glow"></div>
+      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios">
+      <div class="loader-text">ASYLUM WARD STUDIOS</div>
+    </div>
+  </div>
+
+  <!-- Scanline Effect -->
+  <div class="scanline"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">
+      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" style="width: 56px; height: 56px;">
+      <span>ASYLUM WARD</span>
+    </a>
+    <div class="nav-links">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#games" class="nav-link">Games</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#news" class="nav-link">News</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home">Home</a>
+    <a href="#games">Games</a>
+    <a href="#about">About</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="fog-container">
+      <div class="fog fog-1"></div>
+      <div class="fog fog-2"></div>
+      <div class="fog fog-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <h1>ASYLUM WARD</h1>
+        <div class="line"></div>
+        <div class="studios">Studios</div>
+      </div>
+      <p class="hero-tagline">Crafting atmospheric horror experiences where tension comes from mechanics, not just jump scares.</p>
+      <a href="#games" class="btn-primary">Explore Our Games</a>
+    </div>
+    <div class="scroll-indicator">
+      <div><span></span></div>
+    </div>
+  </section>
+
+  <!-- Games Section -->
+  <section id="games">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <h2 class="section-title">Our Games</h2>
+        <p class="section-subtitle">Systems-driven horror experiences</p>
+      </div>
+      <div class="games-grid fade-in">
+        <!-- Game 1: Occult Shop Clicker -->
+        <a href="occult-shop-clicker.html" class="game-card-link">
+        <div class="game-card game-card-osc">
+          <div class="game-card-image">
+            <div class="glow"></div>
+            <span class="game-card-date">Q2 2026</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>Occult Shop Clicker</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre">Idle/Clicker • Cozy Spooky</div>
+            <p>Run a haunted occult shop. Click the register. Buy cursed merchandise. Ascend through three prestige layers as you expand from selling floating candles to forging reality itself.</p>
+          </div>
+        </div>
+        </a>
+        <!-- Game 2: The Padded Room -->
+        <div class="game-card game-card-tpr">
+          <div class="game-card-image">
+            <div class="glow"></div>
+            <span class="game-card-date">COMING 2026</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>The Padded Room</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre">Psychological Horror</div>
+            <p>Reality bends. Walls breathe. Trust nothing—especially yourself.</p>
+          </div>
+        </div>
+        <!-- Game 3: Occult Shop Simulator -->
+        <div class="game-card game-card-oss">
+          <div class="game-card-image">
+            <div class="glow"></div>
+            <span class="game-card-date">TBA</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>Occult Shop Simulator</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre">Simulation</div>
+            <p>Run a supernatural emporium. Curate cursed artifacts. Satisfy customers from beyond the veil.</p>
+          </div>
+        </div>
+        <!-- Game 4: What's In The Woods -->
+        <div class="game-card game-card-witw">
+          <div class="game-card-image">
+            <div class="glow"></div>
+            <span class="game-card-date">TBA</span>
+          </div>
+          <div class="game-card-content">
+            <div class="game-card-header">
+              <h3>What's In The Woods</h3>
+              <span class="status">In Dev</span>
+            </div>
+            <div class="genre">Multiplayer Horror • Co-op / PvP</div>
+            <p>Survive together or betray each other in the darkness between the trees. Some secrets are better left undiscovered.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-subtitle">The minds behind the madness</p>
+      </div>
+      <div class="about-grid fade-in">
+        <div class="about-text">
+          <h3>Our Philosophy</h3>
+          <p>Atmospheric and psychological horror. Systems-driven experiences where tension comes from mechanics, not jump scares.</p>
+          <p>True horror emerges from uncertainty, consequence, and the spaces your mind fills in. Our games create dread through gameplay systems that keep you questioning every decision.</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="number" style="animation-delay: 0s;">4</div>
+            <div class="label">Games In Dev</div>
+          </div>
+          <div class="stat-card">
+            <div class="number text" style="animation-delay: 0.5s;">Minimal</div>
+            <div class="label">Jump Scares</div>
+          </div>
+          <div class="stat-card">
+            <div class="number" style="animation-delay: 1s;">∞</div>
+            <div class="label">Tension</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section id="news">
+    <div class="section-container">
+      <div class="section-header fade-in">
+        <h2 class="section-title">News</h2>
+        <p class="section-subtitle">Dispatches from the asylum</p>
+      </div>
+      <div class="news-grid fade-in">
+        <div class="news-card">
+          <div class="date">January 2026</div>
+          <h3>Welcome to Asylum Ward Studios</h3>
+          <p>We're a newly launched indie studio dedicated to crafting atmospheric horror experiences. Stay tuned for updates on our upcoming projects.</p>
+        </div>
+        <div class="news-card">
+          <div class="date">Q2 2026</div>
+          <h3>Occult Shop Clicker Launch</h3>
+          <p>Our first title is nearly ready. Inherit a supernatural shop and sell goods across dimensions in this idle clicker with a dark twist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <div class="section-header fade-in">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">Reach into the void</p>
+      </div>
+      <form class="contact-form fade-in" action="https://formspree.io/f/xvzaqpbn" method="POST">
+        <div class="form-row">
+          <div>
+            <label for="contact-name" class="sr-only">Name</label>
+            <input type="text" id="contact-name" name="name" placeholder="Name" class="input-field" required>
+          </div>
+          <div>
+            <label for="contact-email" class="sr-only">Email</label>
+            <input type="email" id="contact-email" name="email" placeholder="Email" class="input-field" required>
+          </div>
+        </div>
+        <label for="contact-subject" class="sr-only">Subject</label>
+        <input type="text" id="contact-subject" name="subject" placeholder="Subject" class="input-field">
+        <label for="contact-message" class="sr-only">Message</label>
+        <textarea id="contact-message" name="message" placeholder="Your message..." class="input-field" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+      </form>
+      <div class="contact-footer">
+        <div class="contact-email">
+          <div class="label">Email Us</div>
+          <a href="mailto:contact@asylumwardstudios.com">contact@asylumwardstudios.com</a>
+        </div>
+        <div class="social-links">
+          <a href="https://x.com/AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on X (Twitter)">X</a>
+          <a href="https://instagram.com/AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on Instagram">IG</a>
+          <a href="https://youtube.com/@AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Subscribe on YouTube">YT</a>
+          <a href="https://tiktok.com/@AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Follow us on TikTok">TT</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- Back to Top Button -->
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="display: none; position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #8b0000, #c41e3a); border: none; cursor: pointer; z-index: 1000; transition: all 0.3s ease;">
+    <span style="color: white; font-size: 24px;">↑</span>
+  </button>
+
+  <footer>
+    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" style="width: 60px; height: 60px; margin: 0 auto 15px; display: block;">
+    <div class="logo">ASYLUM WARD STUDIOS</div>
+    <p>© 2026 Asylum Ward Studios. All rights reserved.</p>
+  </footer>
+
+  <!-- Thank You Modal -->
+  <div id="thankYouModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="background: linear-gradient(135deg, #1a1a1f, #0a0a0c); border: 1px solid #c41e3a; padding: 50px; text-align: center; max-width: 400px; margin: 20px;">
+      <h3 style="font-family: 'Montserrat', sans-serif; font-size: 28px; color: #c41e3a; margin-bottom: 20px; letter-spacing: 0.1em;">THANK YOU</h3>
+      <p style="color: #888; font-size: 18px; margin-bottom: 30px;">Your message has been sent. We'll get back to you soon.</p>
+      <button onclick="closeModal()" style="background: linear-gradient(135deg, #8b0000, #c41e3a); color: white; border: none; padding: 14px 35px; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; cursor: pointer;">CLOSE</button>
+    </div>
+  </div>
+
+  <script>
+    // Remove loader after animation
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if (loader) loader.remove();
+    }, 3500);
+
+    // Modal functions
+    function showModal() {
+      document.getElementById('thankYouModal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+      document.getElementById('thankYouModal').style.display = 'none';
+    }
+
+    // Form submission
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          showModal();
+          this.reset();
+        }
+      });
+    });
+    // Scroll animations - fade in sections
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => fadeObserver.observe(el));
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Back to top button visibility
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        backToTop.style.display = 'block';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+  </script>
+</body>
+</html>

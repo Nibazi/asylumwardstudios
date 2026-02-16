@@ -1,0 +1,8 @@
+# Robots.txt for Asylum Ward Studios
+# https://www.asylumwardstudios.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.asylumwardstudios.com/sitemap.xml

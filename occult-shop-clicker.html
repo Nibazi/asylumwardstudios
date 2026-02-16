@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO -->
+  <title>Occult Shop Clicker | Cozy Spooky Idle Clicker | Asylum Ward Studios</title>
+  <meta name="description" content="Run a haunted occult shop. Click the register. Buy cursed merchandise. Watch numbers go up. Ascend through three prestige layers as you expand from selling floating candles to forging reality itself. A cozy, spooky idle clicker.">
+  <meta name="keywords" content="Occult Shop Clicker, idle game, clicker game, incremental game, cozy spooky, gothic victorian, haunted shop, supernatural game, occult game, prestige game, Asylum Ward Studios, indie game, Cookie Clicker, dark fantasy, casual game, relaxing game, offline progress, spectral coins">
+  <meta name="author" content="Asylum Ward Studios">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.asylumwardstudios.com/occult-shop-clicker.html">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.asylumwardstudios.com/occult-shop-clicker.html">
+  <meta property="og:title" content="Occult Shop Clicker | Cozy Spooky Idle Clicker">
+  <meta property="og:description" content="Run a haunted occult shop. Click the register. Buy cursed merchandise. Ascend through three prestige layers. A cozy, spooky idle clicker coming Q2 2026.">
+  <meta property="og:image" content="https://www.asylumwardstudios.com/images/osc/hero.png">
+  <meta property="og:site_name" content="Asylum Ward Studios">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@AsylumWardStudios">
+  <meta name="twitter:url" content="https://www.asylumwardstudios.com/occult-shop-clicker.html">
+  <meta name="twitter:title" content="Occult Shop Clicker | Cozy Spooky Idle Clicker">
+  <meta name="twitter:description" content="Run a haunted shop. Click the register. Buy cursed inventory. Prestige through three layers of cosmic power. Classic idle clicker gameplay with a spooky twist.">
+  <meta name="twitter:image" content="https://www.asylumwardstudios.com/images/osc/hero.png">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#1a1025">
+  <meta name="msapplication-TileColor" content="#7a5a3d">
+  <link rel="icon" type="image/png" sizes="32x32" href="AsylumWardLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="AsylumWardLogo.png">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="AsylumWardLogo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Occult Shop Clicker",
+    "description": "Run a haunted occult shop. Click the register. Buy cursed merchandise. Ascend through three prestige layers as you expand from selling floating candles to forging reality itself.",
+    "genre": ["Idle", "Clicker", "Incremental"],
+    "gamePlatform": "PC",
+    "image": "https://www.asylumwardstudios.com/images/osc/hero.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Asylum Ward Studios",
+      "url": "https://www.asylumwardstudios.com"
+    }
+  }
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: #0a0a0c;
+      color: #e8e8e8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0c;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3d2d1f;
+      border-radius: 4px;
+    }
+
+    /* Game-specific color scheme - Purple/Gold Gothic Victorian */
+    :root {
+      --accent: #9d7cd8;
+      --accent-dark: #6b4c9a;
+      --gold: #c4a24d;
+      --gold-dark: #7a5a3d;
+    }
+
+    /* Animations */
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      42% { opacity: 0.8; }
+      45% { opacity: 0.3; }
+      46% { opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scanline overlay */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.3;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,10,12,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(122, 90, 61, 0.2);
+    }
+
+    .nav-logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #c41e3a;
+      letter-spacing: 0.15em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .nav-link {
+      position: relative;
+      color: #888;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .nav-link:hover {
+      color: var(--gold);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      /* nav height: 15px padding-top + 44px logo + 15px padding-bottom = 74px */
+      margin-top: 74px;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('images/osc/hero.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.5;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(10,10,12,0.4) 0%, rgba(10,10,12,0.7) 60%, #0a0a0c 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+      padding: 40px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .game-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(36px, 7vw, 72px);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      text-shadow: 0 0 40px rgba(157, 124, 216, 0.5);
+      animation: flicker 5s infinite;
+    }
+
+    .game-tagline {
+      font-family: 'Special Elite', cursive;
+      font-size: clamp(18px, 2.5vw, 26px);
+      color: #aaa;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .release-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #1a1025;
+      padding: 12px 30px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(157, 124, 216, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      padding: 14px 38px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(196, 162, 77, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 60px;
+      position: relative;
+    }
+
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--accent);
+      margin-bottom: 30px;
+      letter-spacing: 0.1em;
+    }
+
+    /* Welcome Section */
+    #welcome {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0f0a12 50%, #0a0a0c 100%);
+    }
+
+    .welcome-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .welcome-content p {
+      color: #bbb;
+      font-size: 20px;
+      line-height: 1.9;
+      margin-bottom: 25px;
+    }
+
+    .welcome-content p.italic {
+      font-style: italic;
+      color: #888;
+      font-size: 18px;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: #aaa;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .generator-list {
+      list-style: none;
+      margin-top: 25px;
+      background: rgba(30, 25, 40, 0.5);
+      border: 1px solid rgba(157, 124, 216, 0.2);
+      border-radius: 4px;
+      padding: 25px;
+    }
+
+    .generator-list li {
+      color: #ccc;
+      font-size: 17px;
+      padding: 8px 0;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(157, 124, 216, 0.1);
+    }
+
+    .generator-list li:last-child {
+      border-bottom: none;
+    }
+
+    .generator-list li strong {
+      color: var(--gold);
+    }
+
+    .generator-list li span {
+      color: #777;
+      font-style: italic;
+    }
+
+    .generator-count {
+      text-align: center;
+      margin-top: 15px;
+      color: #666;
+      font-size: 16px;
+    }
+
+    .about-image {
+      width: 100%;
+      border: 1px solid rgba(157, 124, 216, 0.3);
+      border-radius: 4px;
+    }
+
+    /* Prestige Section */
+    #prestige {
+      background: linear-gradient(180deg, #0a0a0c 0%, #12081a 50%, #0a0a0c 100%);
+    }
+
+    .prestige-intro {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 50px;
+      color: #999;
+      font-size: 20px;
+      line-height: 1.8;
+    }
+
+    .prestige-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .prestige-card {
+      background: linear-gradient(135deg, rgba(30, 25, 40, 0.8), rgba(20, 15, 30, 0.8));
+      border: 1px solid rgba(157, 124, 216, 0.2);
+      padding: 35px;
+      border-radius: 4px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .prestige-card:hover {
+      border-color: rgba(157, 124, 216, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .prestige-card .layer {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      color: #666;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .prestige-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--gold);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+
+    .prestige-card p {
+      color: #888;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* Screenshots Section - Fanned Cards */
+    .screenshots-container {
+      position: relative;
+      height: 480px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .screenshot {
+      position: absolute;
+      width: 45%;
+      max-width: 400px;
+      overflow: hidden;
+      border: 2px solid rgba(157, 124, 216, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+      transform-origin: center top;
+      top: 0;
+    }
+
+    .screenshot:hover {
+      z-index: 100 !important;
+      border-color: var(--accent);
+      box-shadow: 0 25px 70px rgba(157, 124, 216, 0.5);
+    }
+
+    .screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot:nth-child(1) {
+      transform: rotate(-12deg) translateX(-70%);
+      z-index: 4;
+    }
+
+    .screenshot:nth-child(1):hover {
+      transform: rotate(-10deg) translateX(-70%) scale(1.08);
+    }
+
+    .screenshot:nth-child(2) {
+      transform: rotate(-4deg) translateX(-25%);
+      z-index: 3;
+    }
+
+    .screenshot:nth-child(2):hover {
+      transform: rotate(-2deg) translateX(-25%) scale(1.08);
+    }
+
+    .screenshot:nth-child(3) {
+      transform: rotate(4deg) translateX(25%);
+      z-index: 2;
+    }
+
+    .screenshot:nth-child(3):hover {
+      transform: rotate(2deg) translateX(25%) scale(1.08);
+    }
+
+    .screenshot:nth-child(4) {
+      transform: rotate(12deg) translateX(70%);
+      z-index: 1;
+    }
+
+    .screenshot:nth-child(4):hover {
+      transform: rotate(10deg) translateX(70%) scale(1.08);
+    }
+
+    .screenshot-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #1a1520, #0f0a15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #444;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .screenshot-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 15px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      color: #aaa;
+      font-size: 14px;
+      letter-spacing: 1px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .screenshot:hover .screenshot-label {
+      opacity: 1;
+    }
+
+    /* Stats Section */
+    #stats {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0f0a12 50%, #0a0a0c 100%);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .stat-item .label {
+      color: #888;
+      font-size: 16px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Features Section */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 20px;
+      background: rgba(30, 25, 40, 0.3);
+      border-radius: 4px;
+      border: 1px solid rgba(157, 124, 216, 0.1);
+    }
+
+    .feature-item .icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .feature-item p {
+      color: #aaa;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* FAQ Section */
+    #faq {
+      background: linear-gradient(180deg, #0a0a0c 0%, #0f0a12 50%, #0a0a0c 100%);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .faq-item {
+      padding: 25px;
+      background: rgba(30, 25, 40, 0.4);
+      border: 1px solid rgba(157, 124, 216, 0.15);
+      border-radius: 4px;
+    }
+
+    .faq-item h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    .faq-item p {
+      color: #999;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    #cta {
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(157, 124, 216, 0.1) 0%, transparent 70%);
+      padding: 120px 60px;
+    }
+
+    #cta .section-title {
+      margin-bottom: 15px;
+    }
+
+    #cta p {
+      color: #888;
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid rgba(122, 90, 61, 0.2);
+      text-align: center;
+    }
+
+    footer img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 15px;
+    }
+
+    footer .studio-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #c41e3a;
+      margin-bottom: 10px;
+      letter-spacing: 0.15em;
+    }
+
+    footer p {
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: #c41e3a;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Screenshot Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border: 1px solid rgba(157, 124, 216, 0.3);
+      border-radius: 4px;
+      cursor: default;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      font-family: sans-serif;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--accent);
+    }
+
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 50px;
+      color: #888;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      user-select: none;
+      padding: 20px;
+    }
+
+    .modal-nav:hover {
+      color: var(--accent);
+    }
+
+    .modal-prev {
+      left: 10px;
+    }
+
+    .modal-next {
+      right: 10px;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1002;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 2px;
+      background: var(--gold);
+      transition: all 0.3s ease;
+      display: block;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 10, 12, 0.98);
+      z-index: 1001;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .mobile-nav.active {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      color: #888;
+      text-decoration: none;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--gold);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .prestige-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .screenshots-container {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .screenshot {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        transform: none !important;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Scanline Effect -->
+  <div class="scanline"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" style="width: 44px; height: 44px;">
+      <span>ASYLUM WARD</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html#games" class="nav-link">Games</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">Home</a>
+    <a href="index.html#games">Games</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-image"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="game-logo">Occult Shop Clicker</h1>
+      <p class="game-tagline">Run a haunted shop. Click the register. Watch numbers and your spirit ascend.</p>
+      <div class="release-badge">Coming Q2 2026</div>
+      <div class="hero-buttons">
+        <a href="#screenshots" class="btn-primary">View Screenshots</a>
+        <a href="index.html#contact" class="btn-secondary">Follow Development</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome Section -->
+  <section id="welcome">
+    <div class="section-container">
+      <div class="welcome-content">
+        <h2 class="section-title" style="text-align: center;">Welcome to your new occult shop.</h2>
+        <p>You've inherited a dusty storefront filled with cursed merchandise, haunted inventory, and a cash register that definitely shouldn't be glowing like that. Click it anyway.</p>
+        <p><strong style="color: var(--accent);">Occult Shop Clicker</strong> is an incremental idle game where you run a supernatural shop, accumulate spectral wealth, and progressively unlock deeper layers of cosmic power.</p>
+        <p class="italic">It's a clicker game. You click things. Numbers get bigger. It's satisfying.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Generators Section -->
+  <section id="generators">
+    <div class="section-container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2 class="section-title">Build Your Supernatural Inventory</h2>
+          <p>Tap the register to earn Spectral Coins. Buy generators to earn coins automatically. Buy upgrades to earn more coins. You know how this works.</p>
+          <p>Stock your shop with increasingly absurd merchandise:</p>
+          <ul class="generator-list">
+            <li><strong>Floating Candles</strong> <span>They hover. Customers love that.</span></li>
+            <li><strong>Bottled Wisps</strong> <span>Ethically sourced. Mostly.</span></li>
+            <li><strong>Poltergeist Tappers</strong> <span>Ghosts that work the register for you</span></li>
+            <li><strong>Summoning Circles</strong> <span>For the discerning interdimensional shopper</span></li>
+            <li><strong>Reality Forges</strong> <span>When regular merchandise isn't enough</span></li>
+          </ul>
+          <p class="generator-count">12 generators total. Each weirder than the last.</p>
+        </div>
+        <div>
+          <img src="images/osc/screenshot-1.png" alt="Occult Shop Clicker gameplay" class="about-image" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY</div>'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prestige Section -->
+  <section id="prestige">
+    <div class="section-container">
+      <h2 class="section-title" style="text-align: center;">Three Layers of Prestige</h2>
+      <p class="prestige-intro">When the numbers get big enough, sacrifice everything for permanent power:</p>
+      <div class="prestige-grid">
+        <div class="prestige-card">
+          <div class="layer">Layer 1</div>
+          <h3>Cult Influence</h3>
+          <p>Reset your shop. Gain influence. Buy upgrades that persist. Do it again, but faster.</p>
+        </div>
+        <div class="prestige-card">
+          <div class="layer">Layer 2</div>
+          <h3>Eldritch Favor</h3>
+          <p>Reset your cult. Gain cosmic favor. Unlock deeper powers. The entities are watching.</p>
+        </div>
+        <div class="prestige-card">
+          <div class="layer">Layer 3</div>
+          <h3>Pact Seals</h3>
+          <p>Reset everything. Bind reality-altering pacts. Change the rules of the game itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots">
+    <div class="section-container">
+      <h2 class="section-title" style="text-align: center; margin-bottom: 45px;">Screenshots</h2>
+      <div class="screenshots-container">
+        <div class="screenshot">
+          <img src="images/osc/screenshot-1.png" alt="Main gameplay view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY VIEW</div>'">
+          <div class="screenshot-label">Main Gameplay View</div>
+        </div>
+        <div class="screenshot">
+          <img src="images/osc/screenshot-2.png" alt="Upgrades panel" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>UPGRADES PANEL</div>'">
+          <div class="screenshot-label">Upgrades Panel</div>
+        </div>
+        <div class="screenshot">
+          <img src="images/osc/screenshot-3.png" alt="Prestige panel" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>PRESTIGE SYSTEM</div>'">
+          <div class="screenshot-label">Prestige System</div>
+        </div>
+        <div class="screenshot">
+          <img src="images/osc/screenshot-4.png" alt="Late-game view" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>LATE-GAME VIEW</div>'">
+          <div class="screenshot-label">Late-Game View</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section id="stats">
+    <div class="section-container">
+      <h2 class="section-title" style="text-align: center;">Upgrades, Milestones, Achievements</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="number">174</div>
+          <div class="label">Upgrades</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">136</div>
+          <div class="label">Milestones</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">40</div>
+          <div class="label">Achievements</div>
+        </div>
+        <div class="stat-item">
+          <div class="number">10</div>
+          <div class="label">Random Events</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features">
+    <div class="section-container">
+      <h2 class="section-title">Features</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="icon">🖱️</span>
+          <p>Classic incremental clicker gameplay</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🏚️</span>
+          <p>A 3D environment that reacts to your progression</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">⚗️</span>
+          <p>Three-layer prestige system with meaningful resets</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🔊</span>
+          <p>Atmospheric ambient audio</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">☁️</span>
+          <p>Cloud saves and offline progress</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">🏆</span>
+          <p>40 Steam achievements</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">💰</span>
+          <p>No microtransactions. You buy the game once.</p>
+        </div>
+        <div class="feature-item">
+          <span class="icon">😴</span>
+          <p>Idle or active—the shop doesn't judge</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="section-container">
+      <h2 class="section-title">FAQ</h2>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3>What kind of game is this?</h3>
+          <p>An incremental clicker/idle game. You click to earn currency, buy things that earn currency automatically, and prestige to reset with bonuses. If you've played Cookie Clicker, you know the format.</p>
+        </div>
+        <div class="faq-item">
+          <h3>How long is it?</h3>
+          <p>As long as you want. The core progression takes several hours. Full completion with all achievements takes considerably longer. It's designed to be played casually over days or weeks.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is it scary?</h3>
+          <p>No. The occult theme is played for atmosphere and humor, not horror. It's cozy spooky, not actually frightening.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Can I play idle?</h3>
+          <p>Yes. The game accumulates offline progress. You can close it and come back later to collected earnings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta">
+    <div class="section-container">
+      <h2 class="section-title">The shop is open. Forever.</h2>
+      <p>Follow us for development updates and release announcements.</p>
+      <div class="hero-buttons">
+        <a href="https://x.com/AsylumWardStudios" target="_blank" rel="noopener noreferrer" class="btn-primary">Follow on X</a>
+        <a href="index.html#contact" class="btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios">
+    <div class="studio-name">ASYLUM WARD STUDIOS</div>
+    <p><a href="index.html">← Back to Main Site</a></p>
+    <p style="margin-top: 15px;">© 2026 Asylum Ward Studios. All rights reserved.</p>
+  </footer>
+
+  <!-- Screenshot Modal -->
+  <div class="modal" id="screenshotModal">
+    <span class="modal-close">&times;</span>
+    <span class="modal-nav modal-prev">&#10094;</span>
+    <span class="modal-nav modal-next">&#10095;</span>
+    <img src="" alt="Screenshot" id="modalImage">
+  </div>
+
+  <script>
+    // Mobile hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Screenshot Modal
+    const modal = document.getElementById('screenshotModal');
+    const modalImg = document.getElementById('modalImage');
+    const screenshots = document.querySelectorAll('.screenshot img');
+    const screenshotSrcs = [];
+    let currentIndex = 0;
+
+    // Collect all screenshot sources
+    screenshots.forEach((img, index) => {
+      if (img.src && !img.src.includes('undefined')) {
+        screenshotSrcs.push(img.src);
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          currentIndex = index;
+          openModal(img.src);
+        });
+      }
+    });
+
+    function openModal(src) {
+      modal.classList.add('active');
+      modalImg.src = src;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = screenshotSrcs.length - 1;
+      if (currentIndex >= screenshotSrcs.length) currentIndex = 0;
+      modalImg.src = screenshotSrcs[currentIndex];
+    }
+
+    // Close on X click
+    document.querySelector('.modal-close').addEventListener('click', closeModal);
+
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Navigation
+    document.querySelector('.modal-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(-1);
+    });
+
+    document.querySelector('.modal-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      navigate(1);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
+
+</body>
+</html>
