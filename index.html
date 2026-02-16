@@ -35,7 +35,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="AsylumWardLogo.png">
 
   <link rel="apple-touch-icon" sizes="180x180" href="AsylumWardLogo.png">
-  
+
+  <!-- Analytics: Add tracking script here (e.g. Plausible: privacy-friendly, no cookie banner needed) -->
+  <!-- <script defer data-domain="asylumwardstudios.com" src="https://plausible.io/js/script.js"></script> -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
@@ -61,6 +64,11 @@
   </script>
 
   <style>
+    :root {
+      --brand: #c41e3a;
+      --brand-dark: #8b0000;
+    }
+
     /* Loading Animation - Red Door Glow */
     #loader {
       position: fixed;
@@ -74,7 +82,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadeOut 0.5s ease-out 3s forwards;
+      animation: fadeOut 0.5s ease-out 1.8s forwards;
+      cursor: pointer;
     }
 
     #loader .logo-container {
@@ -88,7 +97,7 @@
       width: 150px;
       height: 150px;
       opacity: 0.15;
-      animation: logoReveal 2.5s ease-out forwards;
+      animation: logoReveal 1.5s ease-out forwards;
     }
 
     #loader .door-glow {
@@ -100,7 +109,7 @@
       height: 100px;
       background: radial-gradient(ellipse at center, rgba(255, 50, 50, 1) 0%, rgba(196, 30, 58, 0.8) 30%, transparent 70%);
       opacity: 0;
-      animation: doorGlow 2.5s ease-out forwards;
+      animation: doorGlow 1.5s ease-out forwards;
       filter: blur(20px);
       border-radius: 50%;
     }
@@ -114,7 +123,7 @@
       height: 400px;
       background: radial-gradient(ellipse at 50% 20%, rgba(196, 30, 58, 0.6) 0%, rgba(139, 0, 0, 0.3) 25%, transparent 55%);
       opacity: 0;
-      animation: lightSpill 2s ease-out 1s forwards;
+      animation: lightSpill 1.2s ease-out 0.5s forwards;
       filter: blur(15px);
     }
 
@@ -126,7 +135,7 @@
       letter-spacing: 0.15em;
       margin-top: 30px;
       opacity: 0;
-      animation: textFadeIn 1s ease-out 1.8s forwards;
+      animation: textFadeIn 0.6s ease-out 1s forwards;
     }
 
     @keyframes logoReveal {
@@ -236,11 +245,6 @@
       text-transform: uppercase;
     }
 
-    :root {
-      --brand: #c41e3a;
-      --brand-dark: #8b0000;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -328,6 +332,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .nav-logo img {
+      width: 56px;
+      height: 56px;
       text-decoration: none;
     }
 
@@ -853,6 +862,13 @@
       text-align: center;
     }
 
+    footer img {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+      display: block;
+    }
+
     footer .logo {
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
@@ -1149,7 +1165,7 @@
   <!-- Navigation -->
   <nav id="navbar">
     <a href="#home" class="nav-logo">
-      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" style="width: 56px; height: 56px;">
+      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios">
       <span>ASYLUM WARD</span>
     </a>
     <div class="nav-links">
@@ -1368,7 +1384,7 @@
   <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
 
   <footer>
-    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" loading="lazy" style="width: 60px; height: 60px; margin: 0 auto 15px; display: block;">
+    <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" loading="lazy">
     <div class="logo">ASYLUM WARD STUDIOS</div>
     <p>© 2026 Asylum Ward Studios. All rights reserved.</p>
   </footer>
@@ -1384,10 +1400,12 @@
 
   <script>
     // Remove loader after animation
-    setTimeout(() => {
-      const loader = document.getElementById('loader');
+    const loader = document.getElementById('loader');
+    function removeLoader() {
       if (loader) loader.remove();
-    }, 3500);
+    }
+    setTimeout(removeLoader, 2300);
+    if (loader) loader.addEventListener('click', removeLoader);
 
     // Modal functions
     function showModal() {
@@ -1414,7 +1432,11 @@
         if (response.ok) {
           showModal();
           this.reset();
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
         }
+      }).catch(() => {
+        alert('Network error. Please check your connection and try again.');
       });
     });
     // Scroll animations - fade in sections
@@ -1476,6 +1498,14 @@
         mobileNav.classList.remove('active');
         document.body.style.overflow = '';
       });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
 
     // Back to top button visibility

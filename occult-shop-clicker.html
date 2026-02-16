@@ -35,7 +35,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="AsylumWardLogo.png">
 
   <link rel="apple-touch-icon" sizes="180x180" href="AsylumWardLogo.png">
-  
+
+  <!-- Analytics: Add tracking script here (e.g. Plausible: privacy-friendly, no cookie banner needed) -->
+  <!-- <script defer data-domain="asylumwardstudios.com" src="https://plausible.io/js/script.js"></script> -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
@@ -189,6 +192,11 @@
       align-items: center;
       gap: 12px;
       text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 44px;
+      height: 44px;
     }
 
     .nav-logo span {
@@ -980,7 +988,7 @@
   <!-- Navigation -->
   <nav>
     <a href="index.html" class="nav-logo">
-      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios" style="width: 44px; height: 44px;">
+      <img src="AsylumWardLogo.png" alt="Asylum Ward Studios">
       <span>ASYLUM WARD</span>
     </a>
     <div class="nav-links">
@@ -1241,6 +1249,14 @@
         mobileNav.classList.remove('active');
         document.body.style.overflow = '';
       });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     });
 
     // Screenshot Modal
