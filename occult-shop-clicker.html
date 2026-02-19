@@ -541,75 +541,37 @@
 
     /* Screenshots Section - Fanned Cards */
     .screenshots-container {
-      position: relative;
-      height: 480px;
-      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
       margin: 0 auto;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
     }
 
     .screenshot {
-      position: absolute;
-      width: 45%;
-      max-width: 400px;
       overflow: hidden;
       border: 2px solid rgba(157, 124, 216, 0.3);
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.4s ease;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
-      transform-origin: center top;
-      top: 0;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     }
 
     .screenshot:hover {
-      z-index: 100 !important;
+      transform: translateY(-6px);
       border-color: var(--accent);
-      box-shadow: 0 25px 70px rgba(157, 124, 216, 0.5);
+      box-shadow: 0 20px 60px rgba(157, 124, 216, 0.4);
     }
 
     .screenshot img {
       width: 100%;
       height: auto;
       display: block;
+      transition: transform 0.4s ease;
     }
 
-    .screenshot:nth-child(1) {
-      transform: rotate(-12deg) translateX(-70%);
-      z-index: 4;
-    }
-
-    .screenshot:nth-child(1):hover {
-      transform: rotate(-10deg) translateX(-70%) scale(1.08);
-    }
-
-    .screenshot:nth-child(2) {
-      transform: rotate(-4deg) translateX(-25%);
-      z-index: 3;
-    }
-
-    .screenshot:nth-child(2):hover {
-      transform: rotate(-2deg) translateX(-25%) scale(1.08);
-    }
-
-    .screenshot:nth-child(3) {
-      transform: rotate(4deg) translateX(25%);
-      z-index: 2;
-    }
-
-    .screenshot:nth-child(3):hover {
-      transform: rotate(2deg) translateX(25%) scale(1.08);
-    }
-
-    .screenshot:nth-child(4) {
-      transform: rotate(12deg) translateX(70%);
-      z-index: 1;
-    }
-
-    .screenshot:nth-child(4):hover {
-      transform: rotate(10deg) translateX(70%) scale(1.08);
+    .screenshot:hover img {
+      transform: scale(1.05);
     }
 
     .screenshot-placeholder {
@@ -981,18 +943,8 @@
       }
 
       .screenshots-container {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-      }
-
-      .screenshot {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        transform: none !important;
+        grid-template-columns: 1fr;
+        gap: 15px;
       }
 
       .features-grid {
@@ -1089,7 +1041,7 @@
           <p class="generator-count">12 generators total. Each weirder than the last.</p>
         </div>
         <div>
-          <img src="images/osc/screenshot-1.png" alt="Occult Shop Clicker gameplay" class="about-image" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY</div>'">
+          <img src="images/osc/hero.png" alt="Occult Shop Clicker gameplay" class="about-image" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MAIN GAMEPLAY</div>'">
         </div>
       </div>
     </div>
@@ -1130,16 +1082,24 @@
           <div class="screenshot-label">Main Gameplay View</div>
         </div>
         <div class="screenshot">
-          <img src="images/osc/screenshot-2.png" alt="Upgrades panel" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>UPGRADES PANEL</div>'">
-          <div class="screenshot-label">Upgrades Panel</div>
+          <img src="images/osc/screenshot-2.png" alt="Stats panel" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>STATS PANEL</div>'">
+          <div class="screenshot-label">Stats Panel</div>
         </div>
         <div class="screenshot">
-          <img src="images/osc/screenshot-3.png" alt="Prestige panel" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>PRESTIGE SYSTEM</div>'">
-          <div class="screenshot-label">Prestige System</div>
+          <img src="images/osc/screenshot-3.png" alt="Achievements" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>ACHIEVEMENTS</div>'">
+          <div class="screenshot-label">Achievements</div>
         </div>
         <div class="screenshot">
-          <img src="images/osc/screenshot-4.png" alt="Late-game view" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>LATE-GAME VIEW</div>'">
-          <div class="screenshot-label">Late-Game View</div>
+          <img src="images/osc/screenshot-4.png" alt="Milestones" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MILESTONES</div>'">
+          <div class="screenshot-label">Milestones</div>
+        </div>
+        <div class="screenshot">
+          <img src="images/osc/screenshot-5.png" alt="Prestige panel" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>PRESTIGE PANEL</div>'">
+          <div class="screenshot-label">Prestige Panel</div>
+        </div>
+        <div class="screenshot">
+          <img src="images/osc/screenshot-6.png" alt="Mid-game progression with golden spirit event" loading="lazy" onerror="this.outerHTML='<div class=\'screenshot-placeholder\'>MID-GAME PROGRESSION</div>'">
+          <div class="screenshot-label">Mid-Game Progression</div>
         </div>
       </div>
     </div>
