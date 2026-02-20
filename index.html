@@ -341,6 +341,7 @@
 
     nav.scrolled {
       background: rgba(10,10,12,0.95);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(139, 0, 0, 0.2);
     }
@@ -718,6 +719,10 @@
     .stat-card .number.text {
       font-size: 28px;
     }
+
+    .stat-card:nth-child(1) .number { animation-delay: 0s; }
+    .stat-card:nth-child(2) .number { animation-delay: 0.5s; }
+    .stat-card:nth-child(3) .number { animation-delay: 1s; }
 
     .stat-card .label {
       font-family: 'Rajdhani', sans-serif;
@@ -1372,15 +1377,15 @@
         </div>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="number" style="animation-delay: 0s;">4</div>
+            <div class="number">4</div>
             <div class="label">Games In Dev</div>
           </div>
           <div class="stat-card">
-            <div class="number text" style="animation-delay: 0.5s;">Minimal</div>
+            <div class="number text">Minimal</div>
             <div class="label">Jump Scares</div>
           </div>
           <div class="stat-card">
-            <div class="number" style="animation-delay: 1s;">∞</div>
+            <div class="number">∞</div>
             <div class="label">Tension</div>
           </div>
         </div>
