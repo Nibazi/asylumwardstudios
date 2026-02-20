@@ -984,6 +984,37 @@
       letter-spacing: 0.1em;
     }
 
+    .game-card-wrapper .game-card {
+      height: auto;
+    }
+
+    .game-card-wrapper .game-card-link {
+      display: block;
+    }
+
+    .btn-steam-card {
+      display: block;
+      text-align: center;
+      background: linear-gradient(135deg, #1b2838, #2a475e);
+      color: #c7d5e0;
+      padding: 12px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 0 0 8px 8px;
+      margin-top: -4px;
+    }
+
+    .btn-steam-card:hover {
+      background: linear-gradient(135deg, #2a475e, #3d6b8e);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(42, 71, 94, 0.4);
+    }
+
     /* Hamburger Menu */
     .hamburger {
       display: none;
@@ -1243,22 +1274,25 @@
       </div>
       <div class="games-grid fade-in">
         <!-- Game 1: Occult Shop Clicker -->
-        <a href="occult-shop-clicker.html" class="game-card-link">
-        <div class="game-card game-card-osc">
-          <div class="game-card-image">
-            <div class="glow"></div>
-            <span class="game-card-date">Q2 2026</span>
-          </div>
-          <div class="game-card-content">
-            <div class="game-card-header">
-              <h3>Occult Shop Clicker</h3>
-              <span class="status">In Dev</span>
+        <div class="game-card-wrapper">
+          <a href="occult-shop-clicker.html" class="game-card-link">
+          <div class="game-card game-card-osc">
+            <div class="game-card-image">
+              <div class="glow"></div>
+              <span class="game-card-date">Q2 2026</span>
             </div>
-            <div class="genre">Idle/Clicker • Cozy Spooky</div>
-            <p>Run a haunted occult shop. Click the register. Buy cursed merchandise. Ascend through three prestige layers as you expand from selling floating candles to forging reality itself.</p>
+            <div class="game-card-content">
+              <div class="game-card-header">
+                <h3>Occult Shop Clicker</h3>
+                <span class="status">In Dev</span>
+              </div>
+              <div class="genre">Idle/Clicker • Cozy Spooky</div>
+              <p>Run a haunted occult shop. Click the register. Buy cursed merchandise. Ascend through three prestige layers as you expand from selling floating candles to forging reality itself.</p>
+            </div>
           </div>
+          </a>
+          <a href="https://store.steampowered.com/app/3909550/Occult_Shop_Clicker/" target="_blank" rel="noopener noreferrer" class="btn-steam-card">Wishlist on Steam</a>
         </div>
-        </a>
         <!-- Game 2: The Padded Room -->
         <div class="game-card game-card-tpr">
           <div class="game-card-image">
